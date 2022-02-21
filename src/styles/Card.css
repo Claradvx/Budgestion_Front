@@ -1,0 +1,23 @@
+.budget-card {
+    margin-top: 100px;
+    background: var(--darkblue);
+    box-shadow: 0 15px 25px var(--darkblue);
+    border-radius: 40px;
+
+}
+
+.expense-card {
+    background: var(--darkblue);
+    box-shadow: 0 15px 25px var(--darkblue);
+    border-radius: 40px;
+
+}
+
+.name {
+    color: var(--white);
+    text-align: center;
+}
+.description {
+    color: var(--white);
+    text-align: center;
+}

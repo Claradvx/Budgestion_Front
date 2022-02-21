@@ -1,0 +1,53 @@
+.box {
+    width: 400px;
+    padding: 40px;
+    
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+
+    background: var(--darkblue);
+    box-shadow: 0 15px 25px var(--darkblue);
+    border-radius: 40px;
+  }
+  
+  .box h2 {
+    margin: 0 0 30px;
+    padding: 0;
+    color: var(--white);
+    text-align: center;
+  }
+  
+  .box .field {
+    position: relative;
+  }
+  
+  .box .field input {
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    color: var(--white);
+    margin-bottom: 30px;
+    border: none;
+    border-bottom: 1px solid var(--white);
+    outline: none;
+    background: transparent;
+  }
+
+  .box .field label {
+    position: absolute;
+    top:0;
+    left: 0;
+    padding: 10px 0;
+    font-size: 16px;
+    color: var(--white);
+    pointer-events: none;
+    transition: 1s;
+  }
+  
+  .box .field input:focus ~ label {
+    top: -20px;
+    left: 0;
+    color: var(--gold);
+    font-size: 12px;
+  }

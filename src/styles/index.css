@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@900&family=Montserrat:ital,wght@0,400;0,600;1,400&display=swap');
+
+:root {
+  --width: 90%;
+  --black: #000;
+  --darkblue: #3B4D69;
+  --gold: #F8BD49;
+  --white: #FFF;
+}
+
+
+* {
+  font-family: Montserrat, sans-serif;
+  font-size: medium;
+  color: var(--darkblue);
+  margin: 0;
+  padding: 0;
+}
