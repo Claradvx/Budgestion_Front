@@ -1,14 +1,25 @@
+.add .expense-card{
+    max-width: 20%;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    background: var(--gold);
+    display: flex;
+    justify-content: center;
+}
 .budget-card {
-    margin-top: 100px;
+    min-height: 150px;
     background: var(--darkblue);
-    box-shadow: 0 15px 25px var(--darkblue);
+    box-shadow: 0 10px 25px var(--darkblue);
     border-radius: 40px;
 
 }
 
 .expense-card {
+    min-height: 50px;
     background: var(--darkblue);
-    box-shadow: 0 15px 25px var(--darkblue);
+    box-shadow: 0 10px 25px var(--darkblue);
     border-radius: 40px;
 
 }
@@ -16,6 +27,7 @@
 .name {
     color: var(--white);
     text-align: center;
+    margin: 15px 5px;
 }
 .description {
     color: var(--white);

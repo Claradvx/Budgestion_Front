@@ -7,8 +7,8 @@ import MyBudgets from './pages/MyBudgets';
 import Expenses from './pages/Expenses';
 import NotFound from './pages/NotFound';
 import Scale from './pages/Scale';
-import CreateBudget from './pages/CreateBudget';
-import CreateExpense from './pages/CreateExpense';
+import SaveBudget from './pages/SaveBudget';
+import SaveExpense from './pages/SaveExpense';
 import {SignIn, SignUp} from './pages/Connection';
 
 function App() {
@@ -27,9 +27,9 @@ function App() {
             <Route path ="/signup" element = {<SignUp />}/>
             <Route path ="/profile" element = {<Profile />}/>
             <Route path ="/budgets" element = {<MyBudgets />}/>
-            <Route path ="/createbudget" element = {<CreateBudget />}/>
-            <Route path ="/budget:id/expenses" element = {<Expenses />}/>
-            <Route path ="/createexpense" element = {<CreateExpense />}/>
+            <Route path ="/savebudget" element = {<SaveBudget />}/>
+            <Route path ="/budget:id_budget/expenses" element = {<Expenses />}/>
+            <Route path ="/budget:id_budget/saveexpense:id_expense" element = {<SaveExpense />}/>
             <Route path ="/scale" element = {<Scale />}/>
 
             <Route path ="*" element = {<NotFound />}/>

@@ -1,14 +1,14 @@
 import '../styles/Forms.css';
 
-const CreateBudget = () => {
+const SaveExpense = () => {
 
     return (
         <>
-            <h1>Création d'un budget</h1>
+            <h1>Création d'une dépense</h1>
 
             <p>Veuillez saisir les informations ci-dessous :</p>
         </>
     )
 }
 
-export default CreateBudget;
+export default SaveExpense;

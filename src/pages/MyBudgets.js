@@ -26,7 +26,7 @@ const MyBudgets = () => {
     return (
         <>
             <h1>Mes budgets partagés</h1>
-            <div className = "grid">
+            <div className = "grid-budget">
                 {budgets.map(b => (
                                     <div onClick = { () => navigate("/budget" + b.id + "/expenses") }>
                                         <BudgetCard key = {b.id} 

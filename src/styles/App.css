@@ -2,15 +2,22 @@
     text-align: center;
 }
 
-
 .main {
     padding-top: 100px;
     
 
 }
 
-.grid{
+.grid-budget{
+    margin-top: 10px;
     display: grid;
-    gap: 10px;
-    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .grid-expense{
+    margin-top: 15px;
+    display: grid;
+    gap: 15px;
+    grid-template-rows: auto;
   }
