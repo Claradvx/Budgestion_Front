@@ -3,6 +3,7 @@ import '../styles/Forms.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { ContentCutOutlined } from '@mui/icons-material';
 //import propTypes from 'prop-types';
 
 export const SignInForm = () => {
@@ -78,7 +79,7 @@ export const BudgetForm = () => {
     
     const [participants, setParticipants] =  useState([]);
     const [budget, setBudget] =  useState([]);
-    const [participant, setParticipant] =  useState([]);
+    // const [participant, setParticipant] =  useState([]);
     const [budgetMax, setBudgetMax] =  useState([]);
     
     const params = useParams(); // Récupère un objet avec les paramètres
@@ -87,22 +88,30 @@ export const BudgetForm = () => {
     const getParticipants = async () => {
         const {data} = await axios.get(url + id + "/participants");
         setParticipants(data);
-    }
+    };
 
     const getBudget = async () => {
         const {data} = await axios.get(url + id);
         setBudget(data);
     };
 
-    const getParticipant = async () => {
-        const {data} = await axios.get(saveparticipant_url);
-        setParticipant(data);
-    }
+    const createBudget = async (budget) => {
+        const {data} = await axios.post(savebudget_url, budget); 
+        getBudget(data); // relance la requete pour afficher les users 
+    };
 
-    const getBudgetMax = async () => {
-        const {data} = await axios.get(budgetMax_url);
-        setBudgetMax(data);
-        createParticipant
+    // const getParticipant = async () => {
+    //         const {data} = await axios.get(saveparticipant_url);
+    //         setParticipant(data);
+    // };
+
+    const createParticipant = (participant) => {
+        axios.post(saveparticipant_url, participant);
+    };
+
+    const getBudgetMax = () => {
+        axios.get(budgetMax_url)
+            .then( res => setBudgetMax(res.data) );
     };
 
     /*Pour le bouton + : 
@@ -110,15 +119,6 @@ export const BudgetForm = () => {
     l'actualisation se fera automatiquement avec le useEffect 
     */
 
-    const createBudget = async (budget) => {
-        const {data} = await axios.post(savebudget_url, budget); 
-        getBudget(data); // relance la requete pour afficher les users 
-    };
-
-    const createParticipant = (participant) => {
-            axios.post(saveparticipant_url, participant)
-                .then(getParticipant());
-    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -129,32 +129,27 @@ export const BudgetForm = () => {
             const input = form[i];
             budgetForm[input.id] = input.value;
         }
-        
-        
+
         createBudget(budgetForm);
-        const participantForm = {};
         
-        participantForm[form[2].id] = form[2].value; // SetUsername du participant dans la BDD
-        console.log(budgetMax);
-        getBudgetMax();
+        const participantForm = {};
+        participantForm["username"] = form[2].value;
         participantForm["budget"] = budgetMax;
-        console.log(participantForm);
-        createParticipant(participantForm)
+        // participantForm[form[2].id] = form[2].value; // SetUsername du participant dans la BDD
+        console.log(budgetMax);
+        createParticipant(participantForm);
         
         form[0].value = '';
         form[1].value = '';
-        form[2].value = '';
-
-        
-        navigate("/budgets");
+        form[2].value = ''; 
+        // navigate("/budgets");
     }
-
-    
 
     useEffect( () => {
         getParticipants();
         getBudget();
-    }, [] );
+        
+    }, [budgetMax]);
 
     return (
         <> 
