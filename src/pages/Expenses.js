@@ -3,12 +3,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { ExpenseCard } from '../components/Card';
+import Btn from '../components/Btn';
 
 const Expenses = () => {
 
     const navigate = useNavigate();
 
-    const expenses_url = "http://localhost:8090/home/budget";
+    const expenses_url = "http://localhost:8090/budget";
     
     const [expenses, setExpense] =  useState([]);
     const params = useParams(); // Récupère un objet avec les paramètres
@@ -44,7 +45,7 @@ const Expenses = () => {
                 </div>
                 
                 {expenses.map(e => (
-                                    <div onClick = { () => navigate("/budget" + id + "/saveexpense" + e.id) }>
+                                    <div onClick = { () => navigate("/budget" + id + "/expense" + e.id) }>
                                         <ExpenseCard key = {e.id} 
                                                 name = {e.name}
                                                 description = {e.description} 
@@ -54,6 +55,12 @@ const Expenses = () => {
                             )
                 } 
             
+            </div>
+
+
+            <div className = "footer" >
+                <Btn txt = "Modifier le budget" action = { () => navigate("/savebudgets" + id) } />
+                <Btn txt = "Supprimer le budget" /> {/* acction = fonction de suppression du budget */}
             </div>
 
         </>

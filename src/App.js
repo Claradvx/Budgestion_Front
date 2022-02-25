@@ -10,29 +10,31 @@ import Scale from './pages/Scale';
 import SaveBudget from './pages/SaveBudget';
 import SaveExpense from './pages/SaveExpense';
 import {SignIn, SignUp} from './pages/Connection';
+import Expense from './pages/Expense';
 
 function App() {
 
 
   return (
-    <div className = "App">
+    <div className="App">
       <BrowserRouter>
         
         <Header/>
 
-        <div className = "main">
+        <div className="main">
           <Routes>
-            <Route path ="/" element = {<Home />}/>
-            <Route path ="/signin" element = {<SignIn />}/>
-            <Route path ="/signup" element = {<SignUp />}/>
-            <Route path ="/profile" element = {<Profile />}/>
-            <Route path ="/budgets" element = {<MyBudgets />}/>
-            <Route path ="/savebudget" element = {<SaveBudget />}/>
-            <Route path ="/budget:id_budget/expenses" element = {<Expenses />}/>
-            <Route path ="/budget:id_budget/saveexpense:id_expense" element = {<SaveExpense />}/>
-            <Route path ="/scale" element = {<Scale />}/>
+            <Route path="/" element={<Home />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/budgets" element={<MyBudgets />} />
+            <Route path="/savebudget:id_budget" element={<SaveBudget />} />
+            <Route path="/budget:id_budget/expenses" element={<Expenses />} />
+            <Route path="/budget:id_budget/expense:id_expense" element={<Expense />} />
+            <Route path="/budget:id_budget/saveexpense:id_expense" element={<SaveExpense />} />
+            <Route path="/scale" element={<Scale />}/>
 
-            <Route path ="*" element = {<NotFound />}/>
+            <Route path="*" element={<NotFound />}/>
 
           </Routes>
         </div>

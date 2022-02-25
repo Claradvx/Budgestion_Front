@@ -44,10 +44,16 @@
     pointer-events: none;
     transition: 1s;
   }
-  
-  .box .field input:focus ~ label {
+ 
+  .box .field input:focus ~ label,
+  .box .field input:valid ~ label {
     top: -20px;
     left: 0;
     color: var(--gold);
     font-size: 12px;
   }
+
+  
+btn {
+  background-color: var(--gold);
+}

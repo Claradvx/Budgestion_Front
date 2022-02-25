@@ -11,7 +11,7 @@ const NotFound = () => {
         <div>
             <h1>Oupsi ! </h1>
             <h2>R U Lost ?</h2>
-            <img src = 'images/Budgestion_slogan.png' 
+            <img src = 'images/Budgestion_slogan_fondBlanc.png' 
                 alt = 'Budgestion' 
                 onClick = { () => navigate("/") } />
             <p> Le chemin <i>{location.pathname}</i> n'existe pas !</p>

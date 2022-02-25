@@ -1,3 +1,4 @@
+import { BudgetForm } from '../components/Form';
 import '../styles/Forms.css';
 
 const SaveExpense = () => {
@@ -7,6 +8,12 @@ const SaveExpense = () => {
             <h1>Création d'une dépense</h1>
 
             <p>Veuillez saisir les informations ci-dessous :</p>
+
+            
+
+
+
+
         </>
     )
 }

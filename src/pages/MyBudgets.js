@@ -11,7 +11,7 @@ const MyBudgets = () => {
     // Création d'une fonction de parcours d'un fichier json recensant 
     // les(s) budget(s) d'une personne 
     // const api_url = "http://localhost:4000/budget";
-    const budgets_url = "http://localhost:8090/home/budgets"
+    const budgets_url = "http://localhost:8090/budgets"
     const [budgets, setBudget] =  useState([]);
 
     const getBudget = async () => {
@@ -27,6 +27,12 @@ const MyBudgets = () => {
         <>
             <h1>Mes budgets partagés</h1>
             <div className = "grid-budget">
+
+                <div className = "add" 
+                    onClick = { () => navigate("/savebudget0" ) }>
+                    <BudgetCard key = "plus" name = "Add budget" description = "" />
+                </div>
+
                 {budgets.map(b => (
                                     <div onClick = { () => navigate("/budget" + b.id + "/expenses") }>
                                         <BudgetCard key = {b.id} 

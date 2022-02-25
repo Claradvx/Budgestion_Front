@@ -10,7 +10,7 @@ const Header = () => {
     return (
         <header>
             <img className = 'logo' 
-                src = 'images/Budgestion_logo.svg' 
+                src = 'images/Budgestion_logo_fondBleu.svg' 
                 alt = 'Budgestion' 
                 onClick = { () => navigate("/") } />
 
