@@ -9,21 +9,21 @@ const Header = () => {
 
     return (
         <header>
-            <img className = 'logo' 
-                src = 'images/Budgestion_logo_fondBleu.svg' 
-                alt = 'Budgestion' 
-                onClick = { () => navigate("/") } />
+            <img className='logo' 
+                src='images/Budgestion_logo_fondBleu.svg' 
+                alt='Budgestion' 
+                onClick={ () => navigate("/") } />
 
             {(!isConnected) ? 
-                <div className = 'connection'>
-                    <Btn txt = {"Sign in"} 
-                        action = { () => navigate("/signin") } ></Btn>
-                    <Btn txt = {"Sign up"} 
-                        action = { () => navigate("/signup") } ></Btn>
+                <div className='connection'>
+                    <Btn txt={"Sign in"} 
+                        action={ () => navigate("/signin") }></Btn>
+                    <Btn txt={"Sign up"} 
+                        action={ () => navigate("/signup")} ></Btn>
                 </div>
                 :
-                <div className = 'connection'>
-                    <Btn txt = {"Profile"} action = { () => navigate("/profile") } ></Btn>
+                <div className='connection'>
+                    <Btn txt={"Profile"} action={ () => navigate("/profile") } ></Btn>
                 </div>
             }
              

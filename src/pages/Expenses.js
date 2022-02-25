@@ -38,17 +38,17 @@ const Expenses = () => {
     return (
         <>
             <h1>Les dépenses du budget {budget.name}</h1>
-            <div className = "grid-expense">
-                <div className = "add" 
-                    onClick = { () => navigate("/budget" + id + "/saveexpense0" ) }>
-                    <ExpenseCard key = "plus" name = "+" description = "" />
+            <div className='grid-expense'>
+                <div className='add'
+                    onClick={ () => navigate("/budget" + id + "/saveexpense0" ) }>
+                    <ExpenseCard key="plus" name = "+" description = "" />
                 </div>
                 
                 {expenses.map(e => (
-                                    <div onClick = { () => navigate("/budget" + id + "/expense" + e.id) }>
-                                        <ExpenseCard key = {e.id} 
-                                                name = {e.name}
-                                                description = {e.description} 
+                                    <div onClick={ () => navigate("/budget" + id + "/expense" + e.id) }>
+                                        <ExpenseCard key={e.id} 
+                                                name={e.name}
+                                                description={e.description} 
                                                 />
                                     </div>
                                 )
@@ -58,9 +58,9 @@ const Expenses = () => {
             </div>
 
 
-            <div className = "footer" >
-                <Btn txt = "Modifier le budget" action = { () => navigate("/savebudgets" + id) } />
-                <Btn txt = "Supprimer le budget" /> {/* acction = fonction de suppression du budget */}
+            <div className='footer' >
+                <Btn txt="Modifier le budget" action={ () => navigate("/savebudgets" + id) } />
+                <Btn txt="Supprimer le budget" /> {/* acction = fonction de suppression du budget */}
             </div>
 
         </>

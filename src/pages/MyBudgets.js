@@ -28,9 +28,9 @@ const MyBudgets = () => {
             <h1>Mes budgets partagés</h1>
             <div className = "grid-budget">
 
-                <div className = "add" 
+                <div className='add' 
                     onClick = { () => navigate("/savebudget0" ) }>
-                    <BudgetCard key = "plus" name = "Add budget" description = "" />
+                    <BudgetCard key='plus' name='Add budget' description='' />
                 </div>
 
                 {budgets.map(b => (

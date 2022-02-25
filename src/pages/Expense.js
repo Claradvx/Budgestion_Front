@@ -31,8 +31,8 @@ const Expense = () => {
 
 
 
-            <div className="footer" >
-                <Btn txt="Modifier la dépense" action = { () => navigate("/budget" + id_budget + "saveexpense" + id_expense) } />
+            <div className='footer' >
+                <Btn txt="Modifier la dépense" action={ () => navigate("/budget" + id_budget + "saveexpense" + id_expense) } />
                 <Btn txt="Supprimer la dépense" /> {/* acction = fonction de suppression de dépense */}
             </div>
         
