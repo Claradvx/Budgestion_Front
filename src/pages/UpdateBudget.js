@@ -1,10 +1,10 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import SaveExpenseForm from '../components/SaveExpenseForm';
+import UpdateBudgetForm from '../components/UpdateBudgetForm';
 import '../styles/Forms.css';
 
-const SaveExpense = () => {
+const UpdateBudget = () => {
 
     const params = useParams();
     const id = params.id_budget;
@@ -24,17 +24,13 @@ const SaveExpense = () => {
 
     return (
         <>
-            <h1>Création d'une dépense pour le budget "{budget.name}"</h1>
+            <h1>Modification du budget "{budget.name}"</h1>
 
-            <p>Veuillez saisir les informations ci-dessous :</p>
+            <p>Veuillez modifier les informations souhaitées</p>
 
-            <SaveExpenseForm />
-
-
-
-
+            <UpdateBudgetForm />
         </>
     )
 }
 
-export default SaveExpense;
+export default UpdateBudget;

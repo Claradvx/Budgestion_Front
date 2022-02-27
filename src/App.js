@@ -11,6 +11,8 @@ import SaveBudget from './pages/SaveBudget';
 import SaveExpense from './pages/SaveExpense';
 import {SignIn, SignUp} from './pages/Connection';
 import Expense from './pages/Expense';
+import UpdateBudget from './pages/UpdateBudget';
+import SaveParticipants from './pages/SaveParticipants';
 
 function App() {
 
@@ -28,11 +30,13 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/budgets" element={<MyBudgets />} />
-            <Route path="/savebudget:id_budget" element={<SaveBudget />} />
+            <Route path="/savebudget" element={<SaveBudget />} />
+            <Route path="/savebudget:name_budget/Participants" element={<SaveParticipants/>} />
+            <Route path="/updatebudget:id_budget" element={<UpdateBudget />} />
             <Route path="/budget:id_budget/expenses" element={<Expenses />} />
             <Route path="/budget:id_budget/expense:id_expense" element={<Expense />} />
-            <Route path="/budget:id_budget/saveexpense:id_expense" element={<SaveExpense />} />
-            <Route path="/scale" element={<Scale />}/>
+            <Route path="/budget:id_budget/saveexpense" element={<SaveExpense />} />
+            <Route path="//budget:id_budget/balance" element={<Scale />}/>
 
             <Route path="*" element={<NotFound />}/>
 

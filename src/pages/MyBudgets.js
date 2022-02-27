@@ -29,7 +29,7 @@ const MyBudgets = () => {
             <div className = "grid-budget">
 
                 <div className='add' 
-                    onClick = { () => navigate("/savebudget0" ) }>
+                    onClick = { () => navigate("/savebudget" ) }>
                     <BudgetCard key='plus' name='Add budget' description='' />
                 </div>
 

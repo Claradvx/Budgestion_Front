@@ -109,21 +109,19 @@ export const BudgetForm = () => {
         axios.post(saveparticipant_url, participant);
     };
 
-    const getBudgetMax = () => {
-        axios.get(budgetMax_url)
-            .then( res => setBudgetMax(res.data) );
-    };
+
 
     /*Pour le bouton + : 
     * fonction qui crée un participant 
     l'actualisation se fera automatiquement avec le useEffect 
     */
 
-
+    const budgetForm = {};
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
-        const budgetForm = {};
+
         
         for(let i = 0; i < form.length-1 ; i++) {
             const input = form[i];
@@ -148,8 +146,14 @@ export const BudgetForm = () => {
     useEffect( () => {
         getParticipants();
         getBudget();
-        
-    }, [budgetMax]);
+    }, []);
+
+    useEffect( () => {
+        const getBudgetMax = () => {
+            axios.get(budgetMax_url)
+                .then( res => setBudgetMax(res.data) );};
+        getBudgetMax();
+    }, [budgetForm]);
 
     return (
         <> 

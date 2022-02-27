@@ -26,3 +26,17 @@ export const ExpenseCard = ({key, name, description}) => {
     )
     
 }
+
+
+export const BalanceCard = ({key, payeur, montant, beneficiaire}) => {
+
+    return (
+        <>
+            <div key={key} className="balance-card">
+                <p className="tour">{{payeur} + " doit " + {montant} + "€ à " + {beneficiaire}}</p>
+            </div>
+
+        </>
+    )
+    
+}

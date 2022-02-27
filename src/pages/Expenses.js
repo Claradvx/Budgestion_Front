@@ -34,13 +34,18 @@ const Expenses = () => {
         getBudget();
     }, [] );
 
-
+ 
     return (
         <>
-            <h1>Les dépenses du budget {budget.name}</h1>
+            <h1>Les dépenses du budget "{budget.name}"</h1>
+
+            <div className='balance'>
+            <Btn txt="Afficher la balance du budget" action={ () => navigate("/budget" + id + "/balance") } />
+            </div>
+            
             <div className='grid-expense'>
                 <div className='add'
-                    onClick={ () => navigate("/budget" + id + "/saveexpense0" ) }>
+                    onClick={ () => navigate("/budget" + id + "/saveexpense" ) }>
                     <ExpenseCard key="plus" name = "+" description = "" />
                 </div>
                 
@@ -59,7 +64,7 @@ const Expenses = () => {
 
 
             <div className='footer' >
-                <Btn txt="Modifier le budget" action={ () => navigate("/savebudgets" + id) } />
+                <Btn txt="Modifier le budget" action={ () => navigate("/updatebudget" + id) } />
                 <Btn txt="Supprimer le budget" /> {/* acction = fonction de suppression du budget */}
             </div>
 

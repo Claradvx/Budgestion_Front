@@ -1,4 +1,4 @@
-import { BudgetForm } from '../components/Form';
+import SaveBudgetForm from '../components/SaveBudgetForm';
 import '../styles/Forms.css';
 
 const SaveBudget = () => {
@@ -9,7 +9,7 @@ const SaveBudget = () => {
 
             <p>Veuillez saisir les informations ci-dessous :</p>
 
-            <BudgetForm />
+            <SaveBudgetForm />
         </>
     )
 }
