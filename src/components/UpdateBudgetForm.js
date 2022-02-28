@@ -11,6 +11,8 @@ const UpdateBudgetForm = () => {
     const [participants, setParticipants] =  useState([]);
     const [budget, setBudget] =  useState([]);
     const [participant, setParticipant] =  useState([]);
+
+    const [budgetName, setBudgetName] =  useState([]);
     
     const params = useParams(); 
     const id = params.id_budget;
@@ -57,6 +59,10 @@ const UpdateBudgetForm = () => {
         createParticipant(newparticipant);
     }
 
+    const handleChangeinput = (e) => {
+        
+    }
+ 
     const handleSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
@@ -83,7 +89,6 @@ const UpdateBudgetForm = () => {
     useEffect( () => {
         getParticipants();
         getBudget();
-        
     }, []);
 
     return (
@@ -92,17 +97,17 @@ const UpdateBudgetForm = () => {
                 <form onSubmit={handleSubmit}>
                 
                     <div className='field'>
-                        <input type='text' id='name' />
-                        <label htmlFor="name">{budget.name}</label>
+                        <input type='text' id='name' placeholder={budget.name} onChange={(e) => setBudgetName(e.target.value)}/>
+                        <label htmlFor="name">Nom du budget</label>
                     </div>
 
                     <div className='field'>
-                        <input type='text' id='description' />
-                        <label htmlFor="description">{budget.description}</label>
+                        <input type='text' id='description' placeholder={budget.description}/>
+                        <label htmlFor="description">Description</label>
                     </div>
 
                     <div className='field'>
-                        <input type='text' id='username' />
+                        <input type='text' id='username' placeholder={budget.description}/>
                         <label htmlFor='username'>Votre pseudo sur ce budget</label>
                     </div>
                     

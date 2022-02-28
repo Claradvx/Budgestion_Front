@@ -19,6 +19,7 @@ const MyBudgets = () => {
         setBudget(data);
     };
 
+    // Pas d'actualisation de la page après suppression d'un budget (renvoi sur cette page)
     useEffect( () => {
         getBudget();
     }, [] );
