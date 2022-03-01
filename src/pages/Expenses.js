@@ -30,11 +30,11 @@ const Expenses = () => {
         const{data} = await axios.delete("http://localhost:8090/deletebudget" + id_budget);
     }
 
-
+    // Pas d'actualisation de la page MyBudgets après suppression d'un budget 
     useEffect( () => {
         getExpense();
         getBudget();
-    }, [budget] );
+    }, [] );
 
  
     return (

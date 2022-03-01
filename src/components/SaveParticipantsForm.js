@@ -9,7 +9,7 @@ import Checkbox from './Checkbox';
 const SaveParticipantsForm = () => {
 
     const params = useParams();
-    const name = params.name_budget;
+    const id_budget = params.id_budget;
 
     const navigate = useNavigate();
 
@@ -19,31 +19,26 @@ const SaveParticipantsForm = () => {
         setCheckedOne(!checkedOne);
     };
 
-    const [budgetMax, setBudgetMax] =  useState([]);
+    const [budget, setBudget] =  useState([]);
     const [participants, setParticipants] =  useState([{}]);
     const [user, setUser] = useState([]);
     let listParticipant = [];
 
-    const verifBudget = () => {
-        if (budgetMax.name != name){
-            console.log("Veuillez recharger la page svp");
-        }
+
+    const getBudget = () => {
+        axios.get("http://localhost:8090/budget" + id_budget)
+            .then( res => setBudget(res.data) )
+            .then(getParticipants());
     }
 
-    const getBudgetMax = () => {
-        axios.get("http://localhost:8090/budgetmax")
-            .then( res => setBudgetMax(res.data) )};
-
     const getParticipants = async () => {
-        const {data} = await axios.get("http://localhost:8090/budget" + budgetMax.id + "/participants");
+        const {data} = await axios.get("http://localhost:8090/budget" + id_budget + "/participants");
         setParticipants(data);};
 
     useEffect( () => {
 
-        getBudgetMax();
- //       verifBudget();
-
-        getParticipants();
+        getBudget();
+        
     //id User en dur en attendant la gestion des Users
         const getUser = async () => {
             const{data} = await axios.get("http://localhost:8090/user1");
@@ -66,7 +61,7 @@ const SaveParticipantsForm = () => {
         const form = e.target;
         const participantForm = {};
         participantForm["username"] = form[0].value;
-        participantForm["budget"] = budgetMax;
+        participantForm["budget"] = id_budget;
     
         listParticipant.push(participantForm);
         createParticipant(participantForm);
@@ -120,7 +115,7 @@ const SaveParticipantsForm = () => {
                                                                         ))}
                    
                                              </ul>)
-                        : <li id='participants'>Aucun participant n'a été créé pour le budget "{budgetMax.name}"</li>
+                        : <li id='participants'>Aucun participant n'a été créé pour le budget "{budget.name}"</li>
                     }
                     <li>
                         <form className='addparticipant' onSubmit={addParticipantToList}>

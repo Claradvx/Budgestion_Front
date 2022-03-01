@@ -7,9 +7,11 @@ import { useEffect, useState } from 'react';
 const SaveBudgetForm = () => {
 
     const navigate = useNavigate();
+
     
     const createBudget = async (budget) => {
-        const {data} = await axios.post("http://localhost:8090/savebudget", budget);  
+        const {data} = await axios.post("http://localhost:8090/savebudget", budget); 
+        navigate("/savebudget" + data + "/Participants");
     };
 
     const handleSubmit = async (e) => {
@@ -21,10 +23,7 @@ const SaveBudgetForm = () => {
             const input = form[i];
             budgetForm[input.id] = input.value;
         }
-        const BudgetName = budgetForm["name"];
-        console.log("budgetname = " + BudgetName);
         createBudget(budgetForm);
-        navigate("/savebudget" + BudgetName + "/Participants");
     }
 
     useEffect( () => {

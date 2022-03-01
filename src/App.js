@@ -31,7 +31,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/budgets" element={<MyBudgets />} />
             <Route path="/savebudget" element={<SaveBudget />} />
-            <Route path="/savebudget:name_budget/Participants" element={<SaveParticipants/>} />
+            <Route path="/savebudget:id_budget/Participants" element={<SaveParticipants/>} />
             <Route path="/updatebudget:id_budget" element={<UpdateBudget />} />
             <Route path="/budget:id_budget/expenses" element={<Expenses />} />
             <Route path="/budget:id_budget/expense:id_expense" element={<Expense />} />
