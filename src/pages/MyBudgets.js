@@ -27,18 +27,19 @@ const MyBudgets = () => {
     return (
         <>
             <h1>Mes budgets partagés</h1>
-            <div className = "grid-budget">
+            
+            <div className="grid-budget">
 
                 <div className='add' 
-                    onClick = { () => navigate("/savebudget" ) }>
+                    onClick={ () => navigate("/savebudget" ) }>
                     <BudgetCard key='plus' name='Add budget' description='' />
                 </div>
 
                 {budgets.map(b => (
-                                    <div onClick = { () => navigate("/budget" + b.id + "/expenses") }>
-                                        <BudgetCard key = {b.id} 
-                                                name = {b.name}
-                                                description = {b.description} 
+                                    <div onClick={ () => navigate("/budget" + b.id + "/expenses") }>
+                                        <BudgetCard key={b.id} 
+                                                name={b.name}
+                                                description={b.description} 
                                                 />
                                     </div>
                                 )

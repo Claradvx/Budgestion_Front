@@ -31,7 +31,7 @@
 }
 .budget-card:hover {
     border: solid 1px grey;
-    box-shadow: 0 10px 50px var(--darkblue);
+    box-shadow: 0px 10px 50px var(--darkblue);
 }
 
 .expense-card {

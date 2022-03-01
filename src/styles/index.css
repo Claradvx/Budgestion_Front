@@ -11,8 +11,23 @@
 
 * {
   font-family: Montserrat, sans-serif;
-  font-size: medium;
 
   margin: 0;
   padding: 0;
+}
+
+h1 {
+  font-size: x-large;
+}
+
+h2 {
+  font-size: large;
+}
+
+p {
+  font-size: small;
+}
+
+button {
+  font-size: medium;
 }

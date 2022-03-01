@@ -2,7 +2,7 @@ import Btn from './Btn.js';
 import '../styles/Forms.css';
 import { useNavigate} from 'react-router-dom';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect} from 'react';
 
 const SaveBudgetForm = () => {
 
@@ -11,7 +11,7 @@ const SaveBudgetForm = () => {
     
     const createBudget = async (budget) => {
         const {data} = await axios.post("http://localhost:8090/savebudget", budget); 
-        navigate("/savebudget" + data + "/Participants");
+        navigate("/savebudget" + data + "/participants");
     };
 
     const handleSubmit = async (e) => {
