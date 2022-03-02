@@ -6,11 +6,16 @@ header {
     display: flex;
     flex-direction: row;
     align-items: center; /* Centrer les boutons dans la ligne du header */
-    justify-content: space-between;
+    justify-content: space-evenly;
     
     position: fixed;
     border: 1px solid var(--darkblue);
     
+}
+
+.back {
+    height: 50%;
+
 }
 
 .logo {
