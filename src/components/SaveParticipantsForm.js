@@ -28,8 +28,7 @@ const SaveParticipantsForm = () => {
     const getBudget = () => {
         axios.get("http://localhost:8090/budget" + id_budget)
             .then( res => setBudget(res.data) )
-            .then(getParticipants());
-    }
+    }    
 
     const getParticipants = async () => {
         const {data} = await axios.get("http://localhost:8090/budget" + id_budget + "/participants");
