@@ -12,14 +12,16 @@ const ShowExpenseForm = () => {
     const id_expense = params.id_expense;
 
     const [participants, setParticipants] =  useState([[]]);
-    const [expense, setExpense] =  useState({
-        "id": null,
-        "name": null,
-        "description": null,
-        "montant": null,
-        "payeur": {},
-        "beneficiaires": []
-    });
+    const [expense, setExpense] =  useState(
+        {
+            "id": null,
+            "name": null,
+            "description": null,
+            "montant": null,
+            "payeur": {},
+            "beneficiaires": []
+        }
+    );
 
     const [budget, setBudget] =  useState([]);
 
@@ -51,22 +53,22 @@ const ShowExpenseForm = () => {
                 <form>
 
                     <div className='field'>
-                        <label htmlFor="description">Description :</label>
+                        <label htmlFor="description">Description</label>
                         <p className='data'>{expense.description}</p>
                     </div>
 
                     <div className='field'>
-                        <label htmlFor='montant'>Montant :</label>
+                        <label htmlFor='montant'>Montant</label>
                         <p className='data'>{expense.montant} €</p>
                     </div>
                     
                     <div className='field'>
-                        <label htmlFor='montant'>Participant ayant payé la dépense :</label>
+                        <label htmlFor='montant'>Participant ayant payé la dépense</label>
                         <p className='data'>{expense.payeur.username}</p>
                     </div>
                     
                     <div>
-                    <label className='participants' htmlFor='payeur'>Participants ayant bénéficié de la dépense :</label> 
+                    <label className='participants' htmlFor='payeur'>Participant(s) concerné(s) par la dépense</label> 
                         <ul>
                             {expense.beneficiaires.map( b => (
                                                      <li id='participants' key={b.id}>{b.username}</li> 

@@ -1,12 +1,10 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import Btn from '../components/Btn';
+import { useParams } from 'react-router-dom';
+import { ExpenseFooter } from '../components/Footer';
 import ShowExpenseForm from '../components/ShowExpense';
 
 const Expense = () => {
-
-    const navigate = useNavigate();
 
     const [expense, setExpense] =  useState([]);
 
@@ -31,16 +29,9 @@ const Expense = () => {
         <>
             <h1>La dépense : "{expense.name}" </h1>
 
-
             <ShowExpenseForm />
 
-
-            <div className='footer' >
-                <Btn txt="Modifier la dépense" action={ () => navigate("/budget" + id_budget + "saveexpense" + id_expense) } />
-                <Btn txt="Supprimer la dépense" action={ () =>  {
-                                                                 deleteExpense(); 
-                                                                 navigate("/budget"+ id_budget +"/expenses") }} />
-            </div>
+            <ExpenseFooter idBudget={id_budget} idExpense={id_expense} deleteAction={deleteExpense} />
         
         </>
 

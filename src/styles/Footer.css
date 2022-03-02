@@ -1,4 +1,4 @@
-header {
+.footer {
     background-color: var(--darkblue);
     width: 100%;
     height:75px;
@@ -6,18 +6,11 @@ header {
     display: flex;
     flex-direction: row;
     align-items: center; /* Centrer les boutons dans la ligne du header */
-    justify-content: space-evenly;
+    justify-content: space-around;
+    align-self: flex-end;
     
+    margin-top: 30px;
     position: fixed;
     border: 1px solid var(--darkblue);
     
-}
-
-.back {
-    height: 50%;
-
-}
-
-.logo {
-    height: 100%;
 }

@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { BalanceCard } from '../components/Card';
 import '../styles/Scale.css';
 
 const Scale = () => {
@@ -32,10 +31,9 @@ const Scale = () => {
         <>
             <h1>Balance des dépenses du budget "{budget.name}"</h1>
 
-            <div className = "balance">
-                {balance.map (b => ( <p key = {b.id}>
-                {b.payeur} doit {b.montant}€ à {b.beneficiaire}
-                                            </p>))}
+            <div className='scale'>
+                {balance.map (b => ( 
+                        <p key={b.id}>{b.payeur} doit {(b.montant).toFixed(2)}€ à {b.beneficiaire}</p>))}
             </div>
         </>
     )

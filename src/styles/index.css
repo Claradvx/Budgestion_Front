@@ -18,16 +18,28 @@
 
 h1 {
   font-size: x-large;
+  margin: 5px;
 }
 
 h2 {
   font-size: large;
+  margin: 5px;
 }
 
 p {
   font-size: small;
+  margin: 2px;
 }
 
 button {
+  border: none;
+  border-radius: 40px;
+  background: var(--white);
+  color: var(--darkblue);
+
   font-size: medium;
+  font-weight: bold;
+
+  padding: 8px 27px;
+  margin: 10px 10px;
 }
