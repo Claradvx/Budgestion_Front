@@ -11,10 +11,10 @@ const Header = () => {
     return (
         <header>
 
-            <img className='back' src='images/BackLeftArrow.svg' alt='Back navigation' onClick={ () => navigate(-1)} />
-            {/* <p className='back' onClick={ () => navigate(-1)} >{'<'}</p> */}
+            <div className='backdiv'>
+                <img className='back' src='images/BackLeftArrow.svg' alt='Back navigation' onClick={ () => navigate(-1)} />
+            </div>
 
-            <span class="material-icons-outlined">arrow_back_ios</span>
             <img className='logo' 
                 src='images/Budgestion_logo_fondBleu.svg' 
                 alt='Budgestion' 

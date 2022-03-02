@@ -4,21 +4,27 @@ header {
     height:75px;
 
     display: flex;
-    flex-direction: row;
-    align-items: center; /* Centrer les boutons dans la ligne du header */
+    align-items: center; /*Centrer les boutons dans la ligne du header*/
     justify-content: space-between;
-    
+
     position: fixed;
     border: 1px solid var(--darkblue);
     
 }
 
+.backdiv {
+    width: 268px;
+    display: flex;
+    justify-content: left;
+}
+
 .back {
     height: 50%;
-
 }
 
 .logo {
     height: 100%;
-    justify-items: center;
+}
+
+.connection {
 }
