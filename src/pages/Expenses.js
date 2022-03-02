@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { ExpenseCard } from '../components/Card';
-import Btn from '../components/Btn';
+import { BudgetFooter } from '../components/Footer';
 
 const Expenses = () => {
 
@@ -42,7 +42,7 @@ const Expenses = () => {
             <h1>Les dépenses du budget "{budget.name}"</h1>
 
             <div className='balance'>
-            <Btn txt="Afficher la balance du budget" action={ () => navigate("/budget" + id_budget + "/balance") } />
+                <button onClick={ () => navigate("/budget" + id_budget + "/scale") }>"Afficher la balance du budget</button>
             </div>
             
             <div className='grid-expense'>
@@ -64,13 +64,7 @@ const Expenses = () => {
             
             </div>
 
-
-            <div className='footer' >
-                <Btn txt="Modifier le budget" action={ () => navigate("/updatebudget" + id_budget) } />
-                <Btn txt="Supprimer le budget" action={ () =>  {
-                                                                 deleteBudget(); 
-                                                                 navigate("/budgets") }} />
-            </div>
+            <BudgetFooter idBudget={id_budget} deleteAction={deleteBudget} />
 
         </>
     )
