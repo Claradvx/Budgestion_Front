@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { BalanceCard } from '../components/Card';
 import '../styles/Scale.css';
 
 const Scale = () => {
@@ -9,14 +8,14 @@ const Scale = () => {
     const params = useParams();
     const id = params.id_budget;
 
-    const [balance, setBalance] = useState([]);
+    const [scale, setScale] = useState([]);
     const [budget, setBudget] =  useState([]);
 
 
-    const getBalanceByIdBudget = async () => {
-        const {data} = await axios.get("http://localhost:8090/budget"+ id +"/balance");
-        setBalance(data);
-    }
+    const getScaleByIdBudget = async () => {
+        const {data} = await axios.get("http://localhost:8090/budget"+ id +"/scale");
+        setScale(data);
+    };
 
     const getBudget = async () => {
         const {data} = await axios.get("http://localhost:8090/budget" + id);
@@ -25,17 +24,16 @@ const Scale = () => {
 
     useEffect( () => {
         getBudget();
-        getBalanceByIdBudget();
+        getScaleByIdBudget();
     }, [] );
 
     return (
         <>
             <h1>Balance des dépenses du budget "{budget.name}"</h1>
 
-            <div className = "balance">
-                {balance.map (b => ( <p key = {b.id}>
-                {b.payeur} doit {b.montant}€ à {b.beneficiaire}
-                                            </p>))}
+            <div className='scale'>
+                {scale.map (b => ( 
+                        <p key={b.id}>{b.payeur} doit {(b.montant).toFixed(2)}€ à {b.beneficiaire}</p>))}
             </div>
         </>
     )
