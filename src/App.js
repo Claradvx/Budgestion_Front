@@ -14,6 +14,7 @@ import Expense from './pages/Expense';
 import UpdateBudget from './pages/UpdateBudget';
 import SaveParticipants from './pages/SaveParticipants';
 import NameForm from './components/test';
+import UpdateParticipants from './pages/UpdateParticipants';
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
             <Route path="/savebudget" element={<SaveBudget />} />
             <Route path="/savebudget:id_budget/participants" element={<SaveParticipants/>} />
             <Route path="/updatebudget:id_budget" element={<UpdateBudget />} />
+            <Route path="/updatebudget:id_budget/participants" element={<UpdateParticipants />} />
             <Route path="/budget:id_budget/expenses" element={<Expenses />} />
             <Route path="/budget:id_budget/expense:id_expense" element={<Expense />} />
             <Route path="/budget:id_budget/saveexpense" element={<SaveExpense />} />

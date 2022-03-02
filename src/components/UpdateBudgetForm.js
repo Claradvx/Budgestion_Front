@@ -7,6 +7,10 @@ import { useEffect, useState } from 'react';
 const UpdateBudgetForm = () => {
 
     const navigate = useNavigate();
+
+    const [inputName, setInputName] = useState("");
+    const [inputDescription, setInputDescription] = useState("");
+    const [inputUser, setInputUser] = useState("");
     
     const [participants, setParticipants] =  useState([]);
     const [budget, setBudget] =  useState([]);
@@ -15,16 +19,19 @@ const UpdateBudgetForm = () => {
     const [budgetName, setBudgetName] =  useState([]);
     
     const params = useParams(); 
-    const id = params.id_budget;
+    const id_budget = params.id_budget;
 
     const getParticipants = async () => {
-        const {data} = await axios.get("http://localhost:8090/budget" + id + "/participants");
+        const {data} = await axios.get("http://localhost:8090/budget" + id_budget + "/participants");
         setParticipants(data);
     };
 
     const getBudget = async () => {
-        const {data} = await axios.get("http://localhost:8090/budget" + id);
+        const {data} = await axios.get("http://localhost:8090/budget" + id_budget);
         setBudget(data);
+        setInputName(document.getElementById('name').value=data.name);
+        setInputDescription(document.getElementById('description').value=data.description);
+        setInputUser(document.getElementById("username").value='En attente de la gestion des users');
     };
 
     
@@ -59,37 +66,37 @@ const UpdateBudgetForm = () => {
         createParticipant(newparticipant);
     }
 
-    const handleChangeinput = (e) => {
-        
-    }
- 
-    const handleSubmit = (e) => {
+    const validateUpdateBudget = (e) => {
         e.preventDefault();
         const form = e.target;
         const budgetForm = {};
         console.log("coucou");
-        for(let i = 0; i < form.length-1 ; i++) {
-            const input = form[i];
-            budgetForm[input.id] = input.value;
-        }
+        console.log(form[0].id + form[0].value);
+        console.log(form[1].id + form[1].value);
+        budgetForm["id"] = id_budget;
+        budgetForm["name"] = form[0].value;
+        budgetForm["description"] = form[1].value;
+        budgetForm["membersBudget"] = participants;
 
         updateBudget(budgetForm);
-        
-        const participantForm = {};
-        participantForm["username"] = form[2].value;
-        // participantForm[form[2].id] = form[2].value; // SetUsername du participant dans la BDD
-        updateParticipant(participantForm);
         
         form[0].value = '';
         form[1].value = '';
         form[2].value = ''; 
-        // navigate("/budgets");
+    }
+ 
+    const handleSubmit = (e) => {
+        validateUpdateBudget(e);
+        navigate("/budgets");
     }
 
     useEffect( () => {
         getParticipants();
         getBudget();
-    }, []);
+        setInputName();
+        setInputDescription();
+    }, []); 
+
 
     return (
         <> 
@@ -97,38 +104,30 @@ const UpdateBudgetForm = () => {
                 <form onSubmit={handleSubmit}>
                 
                     <div className='field'>
-                        <input type='text' id='name' placeholder={budget.name} onChange={(e) => setBudgetName(e.target.value)}/>
+                        <input type='text' id='name' />
                         <label htmlFor="name">Nom du budget</label>
                     </div>
 
                     <div className='field'>
-                        <input type='text' id='description' placeholder={budget.description}/>
+                        <input type='text' id='description'/>
                         <label htmlFor="description">Description</label>
                     </div>
 
                     <div className='field'>
-                        <input type='text' id='username' placeholder={budget.description}/>
+                        <input type='text' id='username'/>
                         <label htmlFor='username'>Votre pseudo sur ce budget</label>
                     </div>
                     
-                    <div className='participants'>
-                        <ul>
-                            {participants.map( p => <li id='participants' key={p.id}>{p.username}</li> )}
-                            <li>
-                            <div className='addparticipant'>
-                                    <input type='text' id='participant' />
-                                    <button onClick={SaveParticipant}>Ajouter un participant</button>
-                            </div>
-                            </li>
-                        </ul>
-                        
-                    </div>                        
+                                           
 
                     <p>
-                    <Btn txt='OK' type='submit'></Btn>
+                    <Btn txt='Valider les modifications' type='submit'></Btn>
                     </p>
-
+                    <button classeName='button' onClick={ () => {
+                        navigate("/updatebudget" + id_budget + "/participants" )} }>Accéder à la modifications des participants</button>
                 </form>
+
+
             </div>
         </>
     )

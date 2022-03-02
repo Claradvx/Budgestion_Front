@@ -1,11 +1,10 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import UpdateBudgetForm from '../components/UpdateBudgetForm';
 import UpdateParticipantsForm from '../components/UpdateParticipantsForm';
 import '../styles/Forms.css';
 
-const UpdateBudget = () => {
+const UpdateParticipants = () => {
 
     const params = useParams();
     const id = params.id_budget;
@@ -29,9 +28,9 @@ const UpdateBudget = () => {
 
             <p>Veuillez modifier les informations souhaitées</p>
 
-            <UpdateBudgetForm />
+            <UpdateParticipantsForm />
         </>
     )
 }
 
-export default UpdateBudget;
+export default UpdateParticipants;
