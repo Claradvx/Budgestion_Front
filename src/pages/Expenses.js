@@ -41,8 +41,8 @@ const Expenses = () => {
         <>
             <h1>Les dépenses du budget "{budget.name}"</h1>
 
-            <div className='balance'>
-                <button onClick={ () => navigate("/budget" + id_budget + "/scale") }>"Afficher la balance du budget</button>
+            <div className='scale'>
+                <button onClick={ () => navigate("/budget" + id_budget + "/scale") }>Balance du budget</button>
             </div>
             
             <div className='grid-expense'>

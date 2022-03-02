@@ -1,4 +1,4 @@
-.balance{
+.scale{
     font-size: x-large;
     display: flex;
     justify-content: center;
@@ -6,7 +6,7 @@
     align-items: center;
 }
 
-.balance p {
+.scale p {
     width: 50%;
     font-size: 80%;
     display: flex;
