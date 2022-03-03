@@ -1,4 +1,3 @@
-import Btn from './Btn.js';
 import '../styles/Forms.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -91,14 +90,12 @@ const UpdateBudgetForm = () => {
                     
                     <p>
                     <button id='modifBudget' 
-                            classeName='button'
                             type='submit'>
                     Valider les modifications
                     </button>
                     </p>
 
-                    <button id='modifParticiant' 
-                            classeName='button'>
+                    <button id='modifParticiant'>
                     Accéder à la modifications des participants
                     </button>
                 </form>

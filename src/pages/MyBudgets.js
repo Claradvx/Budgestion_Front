@@ -8,21 +8,22 @@ const MyBudgets = () => {
 
     const navigate = useNavigate();
 
-    // Création d'une fonction de parcours d'un fichier json recensant 
-    // les(s) budget(s) d'une personne 
-    // const api_url = "http://localhost:4000/budget";
-    const budgets_url = "http://localhost:8090/budgets"
-    const [budgets, setBudget] =  useState([]);
+    const [budgets, setBudgets] =  useState([]);
 
-    const getBudget = async () => {
-        const {data} = await axios.get(budgets_url);
-        setBudget(data);
+    const getBudgets = async () => {
+        const {data} = await axios.get("http://localhost:8090/budgets");
+        setBudgets(data);
     };
 
-    // Pas d'actualisation de la page après suppression d'un budget (renvoi sur cette page)
+                                                // Pas d'actualisation de la page après suppression d'un budget (renvoi sur cette page)
+    //Update FBZ, avec budget dans useEffect, actualisation ok, mais requete en boucle dans l'appli...
     useEffect( () => {
-        getBudget();
+        getBudgets();
     }, [] );
+
+    useEffect( () => {
+        getBudgets();
+    }, [budgets] );
 
     return (
         <>
@@ -36,8 +37,8 @@ const MyBudgets = () => {
                 </div>
 
                 {budgets.map(b => (
-                                    <div onClick={ () => navigate("/budget" + b.id + "/expenses") }>
-                                        <BudgetCard key={b.id} 
+                                    <div key={b.id} onClick={ () => navigate("/budget" + b.id + "/expenses") }>
+                                        <BudgetCard  
                                                 name={b.name}
                                                 description={b.description} 
                                                 />

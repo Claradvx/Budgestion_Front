@@ -1,10 +1,10 @@
 import '../styles/Card.css'
 
-export const BudgetCard = ({key, name, description}) => {
+export const BudgetCard = ({name, description}) => {
 
     return (
         <>
-            <div key={key} className="budget-card">
+            <div className="budget-card">
                 <h2 className="name">{name}</h2>
                 <p className="description">{description}</p>
             </div>
@@ -13,11 +13,11 @@ export const BudgetCard = ({key, name, description}) => {
 
 }
 
-export const ExpenseCard = ({key, name, description}) => {
+export const ExpenseCard = ({name, description}) => {
 
     return (
         <>
-            <div key={key} className="expense-card">
+            <div className="expense-card">
                 <h2 className="name">{name}</h2>
                 <p className="description">{description}</p>
             </div>
@@ -28,11 +28,11 @@ export const ExpenseCard = ({key, name, description}) => {
 }
 
 
-export const BalanceCard = ({key, payeur, montant, beneficiaire}) => {
+export const BalanceCard = ({payeur, montant, beneficiaire}) => {
 
     return (
         <>
-            <div key={key} className="balance-card">
+            <div className="balance-card">
                 <p className="tour">{{payeur} + " doit " + {montant} + "€ à " + {beneficiaire}}</p>
             </div>
 

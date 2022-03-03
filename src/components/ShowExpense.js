@@ -44,7 +44,6 @@ const ShowExpenseForm = () => {
     useEffect( () => {
         getExpense();
         getBudget();
-        console.log(expense);
     }, []);
 
     return (

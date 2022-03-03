@@ -8,17 +8,15 @@ export const SignInForm = () => {
 
     const navigate = useNavigate();
 
-    const [user, setUser] = useState();
+    // const [user, setUser] = useState();
 
-    const validateUser = async (userLogin) => {
-        const {data} = await axios.post("http://localhost:8090/signin", userLogin);
-        setUser(data);
-    }
+    // const validateUser = async (userLogin) => {
+    //     const {data} = await axios.post("http://localhost:8090/signin", userLogin);
+    //     setUser(data);
+    // }
 
 
     const login = () => {
-
-
 
         navigate("/budgets")
 

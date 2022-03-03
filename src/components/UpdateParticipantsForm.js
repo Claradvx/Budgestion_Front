@@ -3,12 +3,14 @@ import '../styles/Forms.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { ContentCutOutlined } from '@mui/icons-material';
 
 const UpdateParticipantsForm = () => {
 
     const navigate = useNavigate();
 
-    let newparticipant = {};
+    const newparticipant = {};
+
     const [newParticipants, setNewParticipants] =  useState([]);
 
     const [inputUsername, setInputUsername] =  useState([]);
@@ -23,10 +25,8 @@ const UpdateParticipantsForm = () => {
     const getParticipants = async () => {
         const {data} = await axios.get("http://localhost:8090/budget" + id_budget + "/participants");
         setParticipants(data);
-        data.map(p => 
-        setInputUsername(document.getElementById(p.id).value=p.username)
-        );
-        
+        participants.map(p => 
+            setInputUsername(document.getElementById(p.id).value=p.username));
     };
 
     const getBudget = async () => {
@@ -40,13 +40,15 @@ const UpdateParticipantsForm = () => {
     };
 
     const createParticipant = async (participant) => {
-        const {data} = axios.post("http://localhost:8090/saveparticipant", participant);
+        const {data} = await axios.post("http://localhost:8090/saveparticipant", participant);
         setParticipant(data);
-        participants.push(data);
-        console.log("data : " + data);
-        console.log("save participant");
-        console.log("p" , participants);
+        const p = data;
     };
+
+    useEffect( () => {
+        getParticipants();
+        getBudget();
+    }, [participants.lenght]); 
 
 
     const SaveParticipant = (e) => {
@@ -55,43 +57,48 @@ const UpdateParticipantsForm = () => {
         const form = e.target.form;
         
         console.log(form);
-        console.log("input : " + form[0].value);
-        newparticipant["username"] = form[0].value;
+        console.log("input : " + form[form.length-3].value);
+        newparticipant["username"] = form[form.length-3].value;
         newparticipant["budget"] = budget;
-        setParticipant(newparticipant);
+    //    setParticipant(newparticipant);
         createParticipant(newparticipant);
+        
         e.target.value = '';
     }
  
     const handleSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
-        const participantForm = {};
-        
+        const participantForm =         {
+            "id": null,
+            "username": null,
+            "budget": {}
+        };
+        console.log(e);
         console.log("coucou");
-        console.log(form[0].id + form[0].value);
-        console.log(form[1].id + form[1].value);
 
         for(let i = 0; i < form.length-1 ; i++) {
-            participantForm["id"] = form[0].id;
-            participantForm["username"] = form[0].value;
-            newParticipants.push(participantForm);
-        setParticipant(newParticipants);
+            const id = form[i].id;
+            const username = form[i].value;
+            participantForm["id"] = id;
+            participantForm["username"] = username;
+            participantForm["budget"] = budget;
+            console.log(form[i].id + form[i].value);
+            console.log(participantForm);
+      //      newParticipants.push(participantForm);
+            console.log(newParticipants);
+      //     setParticipants(newParticipants);
         }
 
         const budgetForm = {};
         budgetForm["id"] = id_budget;
         budgetForm["membersBudget"] = newParticipants;
-        
+        console.log(newParticipants);
         updateBudget(budgetForm);
 
         // navigate("/budgets");
     }
 
-    useEffect( () => {
-        getParticipants();
-        getBudget();
-    }, []); 
 
 
     return (
@@ -116,7 +123,7 @@ const UpdateParticipantsForm = () => {
                     </div>                        
 
                     <p>
-                    <Btn txt='OK' type='submit'></Btn>
+                    <button type='submit'>OK</button>
                     </p>
 
                 </form>

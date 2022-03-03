@@ -19,6 +19,7 @@ const Expense = () => {
 
     const deleteExpense = async () => {
         const{data} = await axios.delete("http://localhost:8090/deleteexpense" + id_expense);
+        getExpense();
     }
 
     useEffect( () => {

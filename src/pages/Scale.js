@@ -32,8 +32,11 @@ const Scale = () => {
             <h1>Balance des dépenses du budget "{budget.name}"</h1>
 
             <div className='scale'>
-                {scale.map (b => ( 
-                        <p key={b.id}>{b.payeur} doit {(b.montant).toFixed(2)}€ à {b.beneficiaire}</p>))}
+
+                {(scale.length > 0) ? 
+                scale.map (b => ( 
+                        <p key={b.id}>{b.payeur} doit {(b.montant).toFixed(2)}€ à {b.beneficiaire}</p>))
+                : <p>Aucune balance à afficher pour ce budget</p>}
             </div>
         </>
     )

@@ -9,16 +9,16 @@ const Expenses = () => {
 
     const navigate = useNavigate();
 
-    const [expenses, setExpense] =  useState([]);
+    const [expenses, setExpenses] =  useState([]);
     const params = useParams(); // Récupère un objet avec les paramètres
     const id_budget = params.id_budget; // ou const {id} = useParams(); récupérant la données id de useParams
 
     const [budget, setBudget] = useState([]);
 
 
-    const getExpense = async () => {
+    const getExpenses = async () => {
         const {data} = await axios.get("http://localhost:8090/budget" +  id_budget + "/expenses");
-        setExpense(data);
+        setExpenses(data);
     };
 
     const getBudget = async () => {
@@ -32,9 +32,13 @@ const Expenses = () => {
 
     // Pas d'actualisation de la page MyBudgets après suppression d'un budget 
     useEffect( () => {
-        getExpense();
+        getExpenses();
         getBudget();
     }, [] );
+
+    useEffect( () => {
+        getExpenses();
+    }, [expenses.length] );
 
  
     return (
@@ -52,8 +56,8 @@ const Expenses = () => {
                 </div>
                 
                 {expenses.map(e => (
-                                    <div onClick={ () => navigate("/budget" + id_budget + "/expense" + e.id) }>
-                                        <ExpenseCard key={e.id} 
+                                    <div key={e.id} onClick={ () => navigate("/budget" + id_budget + "/expense" + e.id) }>
+                                        <ExpenseCard 
                                                 name={e.name}
                                                 description={e.description} 
                                                 />
