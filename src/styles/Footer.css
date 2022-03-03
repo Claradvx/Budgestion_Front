@@ -6,11 +6,11 @@
     display: flex;
     flex-direction: row;
     align-items: center; /* Centrer les boutons dans la ligne du header */
-    justify-content: space-around;
-    align-self: flex-end;
+    justify-content: space-evenly;
     
-    margin-top: 30px;
     position: fixed;
+    bottom: 0;
+
     border: 1px solid var(--darkblue);
     
 }
