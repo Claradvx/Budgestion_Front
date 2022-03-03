@@ -14,9 +14,6 @@ const UpdateBudgetForm = () => {
     
     const [participants, setParticipants] =  useState([]);
     const [budget, setBudget] =  useState([]);
-    const [participant, setParticipant] =  useState([]);
-
-    const [budgetName, setBudgetName] =  useState([]);
     
     const params = useParams(); 
     const id_budget = params.id_budget;
@@ -34,45 +31,18 @@ const UpdateBudgetForm = () => {
         setInputUser(document.getElementById("username").value='En attente de la gestion des users');
     };
 
-    
-    const updateParticipant = async (budget) => {
-        const {data} = await axios.put("http://localhost:8090/updateparticipant", budget); 
-    
-    };
     const updateBudget = async (budget) => {
         const {data} = await axios.put("http://localhost:8090/updatebudget", budget); 
         getBudget(data);
     };
-
-    // const getParticipant = async () => {
-    //         const {data} = await axios.get(saveparticipant_url);
-    //         setParticipant(data);
-    // };
-
-    const createParticipant = (participant) => {
-        axios.post("http://localhost:8090/saveparticipant", participant);
-    };
-
-
-    /*Pour le bouton + : 
-    * fonction qui crée un participant 
-    l'actualisation se fera automatiquement avec le useEffect 
-    */
-    const SaveParticipant = (e) => {
-        
-        const newparticipant = {};
-        newparticipant["username"] = document.getElementById("participant").value;
-        newparticipant["budget"] = budget;
-        createParticipant(newparticipant);
-    }
-
-    const validateUpdateBudget = (e) => {
+ 
+    const handleSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
+        const submitterButton = e.nativeEvent.submitter.id;
+        console.log(submitterButton);
         const budgetForm = {};
-        console.log("coucou");
-        console.log(form[0].id + form[0].value);
-        console.log(form[1].id + form[1].value);
+
         budgetForm["id"] = id_budget;
         budgetForm["name"] = form[0].value;
         budgetForm["description"] = form[1].value;
@@ -83,11 +53,12 @@ const UpdateBudgetForm = () => {
         form[0].value = '';
         form[1].value = '';
         form[2].value = ''; 
-    }
- 
-    const handleSubmit = (e) => {
-        validateUpdateBudget(e);
-        navigate("/budgets");
+
+        if (submitterButton === "modifBudget") {
+            navigate("/budgets");
+        } else {
+            navigate("/updatebudget" + id_budget + "/participants" )
+        }
     }
 
     useEffect( () => {
@@ -118,16 +89,19 @@ const UpdateBudgetForm = () => {
                         <label htmlFor='username'>Votre pseudo sur ce budget</label>
                     </div>
                     
-                                           
-
                     <p>
-                    <Btn txt='Valider les modifications' type='submit'></Btn>
+                    <button id='modifBudget' 
+                            classeName='button'
+                            type='submit'>
+                    Valider les modifications
+                    </button>
                     </p>
-                    <button classeName='button' onClick={ () => {
-                        navigate("/updatebudget" + id_budget + "/participants" )} }>Accéder à la modifications des participants</button>
+
+                    <button id='modifParticiant' 
+                            classeName='button'>
+                    Accéder à la modifications des participants
+                    </button>
                 </form>
-
-
             </div>
         </>
     )

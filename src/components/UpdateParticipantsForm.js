@@ -8,10 +8,8 @@ const UpdateParticipantsForm = () => {
 
     const navigate = useNavigate();
 
-    const newParticipants =       ({
-        "id": null,
-        "username": null,
-    });
+    let newparticipant = {};
+    const [newParticipants, setNewParticipants] =  useState([]);
 
     const [inputUsername, setInputUsername] =  useState([]);
     
@@ -28,6 +26,7 @@ const UpdateParticipantsForm = () => {
         data.map(p => 
         setInputUsername(document.getElementById(p.id).value=p.username)
         );
+        
     };
 
     const getBudget = async () => {
@@ -40,18 +39,27 @@ const UpdateParticipantsForm = () => {
         getBudget(data);
     };
 
-    const createParticipant = (participant) => {
-        axios.post("http://localhost:8090/saveparticipant", participant);
+    const createParticipant = async (participant) => {
+        const {data} = axios.post("http://localhost:8090/saveparticipant", participant);
+        setParticipant(data);
+        participants.push(data);
+        console.log("data : " + data);
+        console.log("save participant");
+        console.log("p" , participants);
     };
 
 
     const SaveParticipant = (e) => {
         e.preventDefault();
-        const input = e.target.value;
-        const newparticipant = {};
-        newparticipant["username"] = input;
+        console.log(e);
+        const form = e.target.form;
+        
+        console.log(form);
+        console.log("input : " + form[0].value);
+        newparticipant["username"] = form[0].value;
+        newparticipant["budget"] = budget;
+        setParticipant(newparticipant);
         createParticipant(newparticipant);
-        newParticipants.push(newparticipant);
         e.target.value = '';
     }
  
@@ -65,9 +73,10 @@ const UpdateParticipantsForm = () => {
         console.log(form[1].id + form[1].value);
 
         for(let i = 0; i < form.length-1 ; i++) {
-        participantForm["id"] = form[0].id;
-        participantForm["username"] = form[0].value;
-        newParticipants.push(participantForm);
+            participantForm["id"] = form[0].id;
+            participantForm["username"] = form[0].value;
+            newParticipants.push(participantForm);
+        setParticipant(newParticipants);
         }
 
         const budgetForm = {};
