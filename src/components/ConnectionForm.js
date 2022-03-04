@@ -1,4 +1,3 @@
-import Btn from './Btn.js';
 import '../styles/Forms.css';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
@@ -17,9 +16,8 @@ export const SignInForm = () => {
 
 
     const login = () => {
-
+        // isConnected = true
         navigate("/budgets")
-
     }
 
     return (
@@ -36,7 +34,7 @@ export const SignInForm = () => {
                         <label htmlFor="pwd">Password</label>
                     </div>
                     <p>
-                    <Btn txt="OK" type="submit"></Btn>
+                    <button type="submit">OK</button>
                     {/* Si connexion est correct il faudra changer la variable isConnected en true !
                     Ce qui changera dans header vers le bouton Profile !*/}
                     </p>
@@ -72,7 +70,7 @@ export const SignUpForm = () => {
                         <label htmlFor = "pwd" >Password</label>
                     </div>
                     <p>
-                        <Btn txt = "Register" type = "submit" action = { () => navigate("/signin") }></Btn>
+                        <button type = "submit" onClick = { () => navigate("/signin") }>Register</button>
                     </p>
                 </form>
             </div>

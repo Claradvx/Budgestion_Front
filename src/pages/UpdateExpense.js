@@ -7,11 +7,7 @@ import '../styles/Forms.css';
 const UpdateExpense = () => {
 
     const params = useParams();
-    const id_budget = params.id_budget;
     const id_expense = params.id_expense;
-
-    const url = "http://localhost:8090/budget";
-
     const [expense, setExpense] =  useState([]);
 
     const getExpense = async () => {

@@ -1,4 +1,3 @@
-import Btn from './Btn.js';
 import '../styles/Forms.css';
 import { useNavigate} from 'react-router-dom';
 import axios from 'axios';
@@ -45,7 +44,7 @@ const SaveBudgetForm = () => {
                         <label htmlFor="description">Description</label>
                     </div>
                     <p>
-                    <Btn txt='OK' type='submit'></Btn>
+                    <button type='submit'>OK</button>
                     </p>
                     </form>
                 

@@ -9,23 +9,11 @@ const UpdateExpenseForm = () => {
     const navigate = useNavigate();
 
     const [state, setState] = useState({value: ""});
-  
-    const handleChangePayeur = (e) => {
-      setState({value: e.target.value});
-    }
 
     const [checkedOne, setCheckedOne] = useState(false);
-  
-    const handleChangeBeneficiaires = (e) => {
-        setCheckedOne(!checkedOne);
-    };
-
     const [inputName, setInputName] = useState("");
     const [inputDescription, setInputDescription] = useState("");
     const [inputMontant, setInputMontant] = useState(0);
-    
-
-    
     const [payeur, setPayeur] =  useState([]);
     const [participants, setParticipants] =  useState([]);
     const [expense, setExpense] =  useState([]);
@@ -33,6 +21,15 @@ const UpdateExpenseForm = () => {
     const params = useParams(); 
     const id_budget = params.id_budget;
     const id_expense = params.id_expense;
+    const id_user = params.id_user;
+
+    const handleChangePayeur = (e) => {
+        setState({value: e.target.value});
+    };
+  
+    const handleChangeBeneficiaires = (e) => {
+        setCheckedOne(!checkedOne);
+    };
 
     const getParticipants = async () => {
         const {data} = await axios.get("http://localhost:8090/budget" + id_budget + "/participants");
@@ -81,7 +78,7 @@ const UpdateExpenseForm = () => {
 
         updateExpense(expenseForm);
 
-        navigate("/budget" + id_budget + "/expenses");
+        navigate("/user/" + id_user + "/budget" + id_budget + "/expenses");
     }
 
     useEffect( () => {

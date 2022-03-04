@@ -12,6 +12,7 @@ const Expenses = () => {
     const [expenses, setExpenses] =  useState([]);
     const params = useParams(); // Récupère un objet avec les paramètres
     const id_budget = params.id_budget; // ou const {id} = useParams(); récupérant la données id de useParams
+    const id_user = params.id_user;
 
     const [budget, setBudget] = useState([]);
 
@@ -46,17 +47,17 @@ const Expenses = () => {
             <h1>Les dépenses du budget "{budget.name}"</h1>
 
             <div className='scale'>
-                <button onClick={ () => navigate("/budget" + id_budget + "/scale") }>Balance du budget</button>
+                <button onClick={ () => navigate("/user/" + id_user + "/budget" + id_budget + "/scale") }>Balance du budget</button>
             </div>
             
             <div className='grid-expense'>
                 <div className='add'
-                    onClick={ () => navigate("/budget" + id_budget + "/saveexpense" ) }>
+                    onClick={ () => navigate("/user/" + id_user + "/budget" + id_budget + "/saveexpense" ) }>
                     <ExpenseCard key="plus" name = "+" description = "" />
                 </div>
                 
                 {expenses.map(e => (
-                                    <div key={e.id} onClick={ () => navigate("/budget" + id_budget + "/expense" + e.id) }>
+                                    <div key={e.id} onClick={ () => navigate("/user/" + id_user + "/budget" + id_budget + "/expense" + e.id) }>
                                         <ExpenseCard 
                                                 name={e.name}
                                                 description={e.description} 

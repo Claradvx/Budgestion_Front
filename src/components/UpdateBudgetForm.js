@@ -16,6 +16,7 @@ const UpdateBudgetForm = () => {
     
     const params = useParams(); 
     const id_budget = params.id_budget;
+    const id_user = params.id_user;
 
     const getParticipants = async () => {
         const {data} = await axios.get("http://localhost:8090/budget" + id_budget + "/participants");
@@ -54,9 +55,9 @@ const UpdateBudgetForm = () => {
         form[2].value = ''; 
 
         if (submitterButton === "modifBudget") {
-            navigate("/budgets");
+            navigate("/user/" + id_user + "/budgets");
         } else {
-            navigate("/updatebudget" + id_budget + "/participants" )
+            navigate("/user/" + id_user + "/updatebudget" + id_budget + "/participants" )
         }
     }
 
@@ -89,14 +90,13 @@ const UpdateBudgetForm = () => {
                     </div>
                     
                     <p>
-                    <button id='modifBudget' 
-                            type='submit'>
-                    Valider les modifications
+                    <button id='modifBudget' type='submit'>
+                        Valider les modifications
                     </button>
                     </p>
 
                     <button id='modifParticiant'>
-                    Accéder à la modifications des participants
+                        Accéder à la modifications des participants
                     </button>
                 </form>
             </div>

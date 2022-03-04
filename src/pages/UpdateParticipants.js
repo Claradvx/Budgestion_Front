@@ -8,13 +8,10 @@ const UpdateParticipants = () => {
 
     const params = useParams();
     const id = params.id_budget;
-
-    const url = "http://localhost:8090/budget";
-
     const [budget, setBudget] =  useState([]);
 
     const getBudget = async () => {
-        const {data} = await axios.get(url + id);
+        const {data} = await axios.get("http://localhost:8090/budget" + id);
         setBudget(data);
     };
 

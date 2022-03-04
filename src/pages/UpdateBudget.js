@@ -2,20 +2,16 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import UpdateBudgetForm from '../components/UpdateBudgetForm';
-import UpdateParticipantsForm from '../components/UpdateParticipantsForm';
 import '../styles/Forms.css';
 
 const UpdateBudget = () => {
-
-    const params = useParams();
-    const id = params.id_budget;
-
-    const url = "http://localhost:8090/budget";
-
+    
     const [budget, setBudget] =  useState([]);
+    const params = useParams();
+    const id_user = params.id_budget;
 
     const getBudget = async () => {
-        const {data} = await axios.get(url + id);
+        const {data} = await axios.get("http://localhost:8090/budget" + id_user);
         setBudget(data);
     };
 
