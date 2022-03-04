@@ -3,7 +3,7 @@ import '../styles/Home.css';
 const Home = () => {
 
     return (
-        <>
+<>
             <h1>Bienvenue sur Budgestion</h1>
 
             <h3>L'application de gestion de pour vos budgets partagés ! </h3>
