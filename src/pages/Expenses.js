@@ -9,16 +9,15 @@ const Expenses = () => {
 
     const navigate = useNavigate();
 
+    const [budget, setBudget] = useState([]);
     const [expenses, setExpenses] =  useState([]);
+    
     const params = useParams(); // Récupère un objet avec les paramètres
     const id_budget = params.id_budget; // ou const {id} = useParams(); récupérant la données id de useParams
     const id_user = params.id_user;
 
-    const [budget, setBudget] = useState([]);
-
-
     const getExpenses = async () => {
-        const {data} = await axios.get("http://localhost:8090/budget" +  id_budget + "/expenses");
+        const {data} = await axios.get("http://localhost:8090/budget/" +  id_budget + "/expenses");
         setExpenses(data);
     };
 
@@ -46,18 +45,16 @@ const Expenses = () => {
         <>
             <h1>Les dépenses du budget "{budget.name}"</h1>
 
-            <div className='scale'>
-                <button onClick={ () => navigate("/user/" + id_user + "/budget" + id_budget + "/scale") }>Balance du budget</button>
-            </div>
-            
+            <button id='button-scale' onClick={ () => navigate("/user/" + id_user + "/budget/" + id_budget + "/scale") }>Balance du budget</button>
+
             <div className='grid-expense'>
                 <div className='add'
-                    onClick={ () => navigate("/user/" + id_user + "/budget" + id_budget + "/saveexpense" ) }>
+                    onClick={ () => navigate("/user/" + id_user + "/budget/" + id_budget + "/saveexpense" ) }>
                     <ExpenseCard key="plus" name = "+" description = "" />
                 </div>
                 
                 {expenses.map(e => (
-                                    <div key={e.id} onClick={ () => navigate("/user/" + id_user + "/budget" + id_budget + "/expense" + e.id) }>
+                                    <div key={e.id} onClick={ () => navigate("/user/" + id_user + "/budget/" + id_budget + "/expense/" + e.id) }>
                                         <ExpenseCard 
                                                 name={e.name}
                                                 description={e.description} 

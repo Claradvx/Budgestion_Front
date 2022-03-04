@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import '../styles/Scale.css';
+import { ScaleCard } from '../components/Card';
 
 const Scale = () => {
 
@@ -30,12 +30,16 @@ const Scale = () => {
         <>
             <h1>Balance des dépenses du budget "{budget.name}"</h1>
 
-            <div className='scale'>
+            <div className='grid-scale'>
 
-                {(scale.length > 0) ? 
-                scale.map (b => ( 
-                        <p key={b.id}>{b.payeur} doit {(b.montant).toFixed(2)}€ à {b.beneficiaire}</p>))
-                : <p>Aucune balance à afficher pour ce budget</p>}
+                {(scale.length > 0) 
+                ? 
+                scale.map (s => ( 
+                        <ScaleCard key={s.id} payeur={s.payeur} montant={s.montant} beneficiaire={s.beneficiaire} />
+                        ) )
+                : 
+                <p>Aucune balance à afficher pour ce budget</p>
+                }
             </div>
         </>
     )

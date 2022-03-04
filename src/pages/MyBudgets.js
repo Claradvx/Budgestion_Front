@@ -25,7 +25,7 @@ const MyBudgets = () => {
 
     useEffect( () => {
         getBudgets();
-    }, [budgets] );
+    }, [] );
 
     return (
         <>
@@ -39,7 +39,7 @@ const MyBudgets = () => {
                 </div>
 
                 {budgets.map(b => (
-                                    <div key={b.id} onClick={ () => navigate("/user/" + id_user + "/budget" + b.id + "/expenses") }>
+                                    <div key={b.id} onClick={ () => navigate("/user/" + id_user + "/budget/" + b.id + "/expenses") }>
                                         <BudgetCard  
                                                 name={b.name}
                                                 description={b.description} 
