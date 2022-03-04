@@ -1,6 +1,6 @@
 import '../styles/Forms.css';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 export const SignInForm = () => {
@@ -9,22 +9,32 @@ export const SignInForm = () => {
 
     const [user, setUser] = useState([]);
 
+    let id_user;
     const validateUser = async (userLogin) => {
         const {data} = await axios.post("http://localhost:8090/signin", userLogin);
+        id_user =  data.id;
         setUser(data);
     }
+
 
     const login = (e) => {
         e.preventDefault();
         const form = e.target;
 
-        user["username"] = form[0].value;
-        user["password"] = form[1].value;
-    
-        validateUser(user);
-        navigate("/user/" + user.id + "/budgets");
+        const userForm = {};
+        userForm["username"] = form[0].value;
+        userForm["password"] = form[1].value;
+        
+        
+        validateUser(userForm).then(() => navigate("/user/" + id_user + "/budgets"));
+        
+        // navigate("/user/" + user.id + "/budgets");
     }
 
+    useEffect( () => {
+        setUser();
+    }, [user] );
+    
     return (
         <>
             <div className='box'>
