@@ -6,15 +6,12 @@ import '../styles/Forms.css';
 
 const SaveExpense = () => {
 
-    const params = useParams();
-    const id = params.id_budget;
-
-    const url = "http://localhost:8090/budget";
-
     const [budget, setBudget] =  useState([]);
+    const params = useParams();
+    const id_budget = params.id_budget;
 
     const getBudget = async () => {
-        const {data} = await axios.get(url + id);
+        const {data} = await axios.get("http://localhost:8090/budget/" + id_budget);
         setBudget(data);
     };
 
@@ -29,9 +26,6 @@ const SaveExpense = () => {
             <p>Veuillez saisir les informations ci-dessous :</p>
 
             <SaveExpenseForm />
-
-
-
 
         </>
     )

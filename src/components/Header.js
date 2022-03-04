@@ -1,7 +1,5 @@
-import { iconButtonClasses } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import '../styles/Header.css';
-import Btn from './Btn.js';
 
 const Header = () => {
 
@@ -22,14 +20,12 @@ const Header = () => {
 
             {(!isConnected) ? 
                 <div className='connection'>
-                    <Btn txt={"Sign in"} 
-                        action={ () => navigate("/signin") }></Btn>
-                    <Btn txt={"Sign up"} 
-                        action={ () => navigate("/signup")} ></Btn>
+                    <button onClick={ () => navigate("/signin") } >Sign in</button>
+                    <button onClick={ () => navigate("/signup") } >Sign up</button>
                 </div>
                 :
                 <div className='connection'>
-                    <Btn txt={"Profile"} action={ () => navigate("/profile") } ></Btn>
+                    <button onClick={ () => navigate("/profile") } >Profile</button>
                 </div>
             }
              

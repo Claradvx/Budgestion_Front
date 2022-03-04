@@ -1,40 +1,36 @@
 import '../styles/Forms.css';
-import Btn from './Btn.js';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Checkbox, FormGroup, FormControlLabel } from '@material-ui/core';
-//import { FormControlLabel, FormGroup } from '@mui/material';
 
 
 
 const SaveExpenseForm = () => {
 
     const navigate = useNavigate();
-
-    const [state, setState] = useState({value: ""});
-  
-    const handleChangePayeur = (e) => {
-      setState({value: e.target.value});
-    }
     
-    const params = useParams(); 
-    const id = params.id_budget; 
-
-
-    const [checkedOne, setCheckedOne] = useState(false);
-  
-    const handleChangeBeneficiaires = (e) => {
-        setCheckedOne(!checkedOne);
-    };
-
     const [payeur, setPayeur] =  useState([]);
     const [participants, setParticipants] =  useState([[]]);
   //  const [expense, setExpense] =  useState([[]]);
     const [budget, setBudget] =  useState([]);
+    const [checkedOne, setCheckedOne] = useState(false);
+    const [state, setState] = useState({value: ""});
+    
+    const params = useParams(); 
+    const id_budget = params.id_budget;
+    const id_user = params.id_user;
+  
+    const handleChangeBeneficiaires = (e) => {
+        setCheckedOne(!checkedOne);
+    };;
+
+    const handleChangePayeur = (e) => {
+      setState({value: e.target.value});
+    };
 
     const getParticipants = async () => {
-        const {data} = await axios.get("http://localhost:8090/budget" + id + "/participants");
+        const {data} = await axios.get("http://localhost:8090/budget" + id_budget + "/participants");
         setParticipants(data);
     };
 
@@ -44,7 +40,7 @@ const SaveExpenseForm = () => {
     };
 
     const getBudget = async () => {
-        const {data} = await axios.get("http://localhost:8090/budget" + id);
+        const {data} = await axios.get("http://localhost:8090/budget" + id_budget);
         setBudget(data);
     };
 
@@ -62,11 +58,12 @@ const SaveExpenseForm = () => {
             const input = form[i];
             expenseForm[input.id] = input.value;
         }
+        
         expenseForm["budget"] = budget;
         expenseForm["payeur"] = payeur;
-        console.log(expenseForm);
+
         createExpense(expenseForm)
-        .then(navigate("/budget" +id + "/expenses"));
+            .then(navigate("/user/" + id_user + "/budget" + id_budget + "/expenses"));
     }
 
     useEffect( () => {
@@ -82,7 +79,7 @@ const SaveExpenseForm = () => {
 
                     <div className='field'>
                         <input type='text' id='name' />
-                        <label htmlFor="name">Nom de la dépense</label>
+                        <label htmlFor='name'>Nom de la dépense</label>
                     </div>
 
                     <div className='field'>
@@ -107,15 +104,18 @@ const SaveExpenseForm = () => {
                         <FormGroup>
                             {participants.map( p => (
                                                      <li id='participants'>
-                                                    <FormControlLabel key={p.id} control={<Checkbox  value={checkedOne} id={p.username}
-                                                     onChange={handleChangeBeneficiaires} />} label={p.username} />
+                                                        <FormControlLabel key={p.id} 
+                                                                        control={<Checkbox  value={checkedOne} 
+                                                                                            id={p.username} 
+                                                                                            onChange={handleChangeBeneficiaires} />} 
+                                                                        label={p.username} />
                                                      </li> 
                                                      ))}
                         </FormGroup>
                         </ul>                       
 
                     <p>
-                    <Btn txt='OK' type='submit'></Btn>
+                    <button type='submit'>OK</button>
                     </p>
 
                 </form>

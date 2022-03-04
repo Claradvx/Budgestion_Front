@@ -1,9 +1,5 @@
-.scale button {
-    border: solid;
-    border-radius: 40px;
-    background: blanchedalmond;
-    color: var(--darkblue);
-    font-weight: bold;
-    padding: 8px 27px;
-    margin: 10px 10px;
+#button-scale {
+    font-size: large;
+    color: var(--gold);
+    border: 2px solid var(--darkblue);
 }

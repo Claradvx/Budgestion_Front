@@ -1,5 +1,5 @@
 import '../styles/Forms.css';
-import { useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
 
@@ -36,7 +36,7 @@ export const SignInForm = () => {
 
     return (
         <>
-            <div className="box">
+            <div className='box'>
                 <h2>Sign in</h2>
                 <form onSubmit={login}>
                     <div className="field">
@@ -62,24 +62,24 @@ export const SignUpForm = () => {
 
     return (
         <>
-            <div className = "box">
+            <div className = 'box'>
                 <h2>Sign up</h2>
                 <form >
-                    <div className = "field">
-                        <input type = "text" id = "firstname" />
-                        <label htmlFor = "firstname" >Firstname</label>
+                    <div className = 'field'>
+                        <input type = 'text' id = 'firstname' />
+                        <label htmlFor = 'firstname' >Firstname</label>
                     </div>
-                    <div className = "field">
-                        <input type = "text" id = "lastname" />
-                        <label htmlFor = "lastname" >Lastname</label>
+                    <div className = 'field'>
+                        <input type = 'text' id = 'lastname' />
+                        <label htmlFor = 'lastname' >Lastname</label>
                     </div>
-                    <div className = "field">
-                        <input type = "text" id = "email-signup" />
-                        <label htmlFor = "email" >Email</label>
+                    <div className = 'field'>
+                        <input type = 'text' id = 'email-signup' />
+                        <label htmlFor = 'email' >Email</label>
                     </div>
-                    <div className = "field">
-                        <input type = "password" id = "pwd-signup" />
-                        <label htmlFor = "pwd" >Password</label>
+                    <div className = 'field'>
+                        <input type = 'password' id = 'pwd-signup' />
+                        <label htmlFor = 'pwd' >Password</label>
                     </div>
                     <p>
                         <button type = "submit" action = { () => navigate("/signin") }>Register</button>

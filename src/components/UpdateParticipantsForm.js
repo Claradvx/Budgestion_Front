@@ -1,4 +1,3 @@
-import Btn from './Btn.js';
 import '../styles/Forms.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -12,9 +11,7 @@ const UpdateParticipantsForm = () => {
     const newparticipant = {};
 
     const [newParticipants, setNewParticipants] =  useState([]);
-
     const [inputUsername, setInputUsername] =  useState([]);
-    
     const [participants, setParticipants] =  useState([]);
     const [budget, setBudget] =  useState([]);
     const [participant, setParticipant] =  useState([]);

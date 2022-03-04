@@ -13,12 +13,12 @@ const Expense = () => {
     const id_expense = params.id_expense;
 
     const getExpense = async () => {
-        const {data} = await axios.get("http://localhost:8090/expense" + id_expense);
+        const {data} = await axios.get("http://localhost:8090/expense/" + id_expense);
         setExpense(data);
     };
 
     const deleteExpense = async () => {
-        const{data} = await axios.delete("http://localhost:8090/deleteexpense" + id_expense);
+        const{data} = await axios.delete("http://localhost:8090/deleteexpense/" + id_expense);
         getExpense();
     }
 

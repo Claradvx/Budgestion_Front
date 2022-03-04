@@ -31,17 +31,17 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/budgets" element={<MyBudgets />} />
-            <Route path="/savebudget" element={<SaveBudget />} />
-            <Route path="/savebudget:id_budget/participants" element={<SaveParticipants/>} />
-            <Route path="/updatebudget:id_budget" element={<UpdateBudget />} />
-            <Route path="/updatebudget:id_budget/participants" element={<UpdateParticipants />} />
-            <Route path="/budget:id_budget/expenses" element={<Expenses />} />
-            <Route path="/budget:id_budget/expense:id_expense" element={<Expense />} />
-            <Route path="/budget:id_budget/saveexpense" element={<SaveExpense />} />
-            <Route path="/budget:id_budget/updateexpense:id_expense" element={<UpdateExpense />} />
-            <Route path="/budget:id_budget/scale" element={<Scale />}/>
+            <Route path="/user/:id_user/profile" element={<Profile />} />
+            <Route path="/user/:id_user/budgets" element={<MyBudgets />} />
+            <Route path="/user/:id_user/savebudget" element={<SaveBudget />} />
+            <Route path="/user/:id_user/savebudget/:id_budget/participants" element={<SaveParticipants/>} />
+            <Route path="/user/:id_user/updatebudget/:id_budget" element={<UpdateBudget />} />
+            <Route path="/user/:id_user/updatebudget/:id_budget/participants" element={<UpdateParticipants />} />
+            <Route path="/user/:id_user/budget/:id_budget/expenses" element={<Expenses />} />
+            <Route path="/user/:id_user/budget/:id_budget/expense/:id_expense" element={<Expense />} />
+            <Route path="/user/:id_user/budget/:id_budget/saveexpense" element={<SaveExpense />} />
+            <Route path="/user/:id_user/budget/:id_budget/updateexpense/:id_expense" element={<UpdateExpense />} />
+            <Route path="/user/:id_user/budget/:id_budget/scale" element={<Scale />}/>
 
             <Route path="*" element={<NotFound />}/>
 

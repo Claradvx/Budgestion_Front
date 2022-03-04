@@ -6,16 +6,13 @@ import '../styles/Forms.css';
 
 const UpdateExpense = () => {
 
+    const [expense, setExpense] =  useState([]);
+    
     const params = useParams();
-    const id_budget = params.id_budget;
     const id_expense = params.id_expense;
 
-    const url = "http://localhost:8090/budget";
-
-    const [expense, setExpense] =  useState([]);
-
     const getExpense = async () => {
-        const {data} = await axios.get("http://localhost:8090/expense" + id_expense);
+        const {data} = await axios.get("http://localhost:8090/expense/" + id_expense);
         setExpense(data);
     };
 

@@ -1,11 +1,9 @@
 import '../styles/Forms.css';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 const ShowExpenseForm = () => {
-
-    const navigate = useNavigate();
 
     const params = useParams(); 
     const id_budget = params.id_budget; 

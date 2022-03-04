@@ -4,39 +4,36 @@ export const BudgetCard = ({name, description}) => {
 
     return (
         <>
-            <div className="budget-card">
-                <h2 className="name">{name}</h2>
-                <p className="description">{description}</p>
+            <div className='budget-card'>
+                <h3 className='name'>{name}</h3>
+                <p className='description'>{description}</p>
             </div>
         </>
     )
-
 }
 
 export const ExpenseCard = ({name, description}) => {
 
     return (
         <>
-            <div className="expense-card">
-                <h2 className="name">{name}</h2>
-                <p className="description">{description}</p>
+            <div className='expense-card'>
+                <h3 className='name'>{name}</h3>
+                <p className='description'>{description}</p>
             </div>
 
         </>
     )
-    
 }
 
 
-export const BalanceCard = ({payeur, montant, beneficiaire}) => {
+export const ScaleCard = ({payeur, montant, beneficiaire}) => {
 
     return (
         <>
-            <div className="balance-card">
-                <p className="tour">{{payeur} + " doit " + {montant} + "€ à " + {beneficiaire}}</p>
+            <div className='scale-card'>
+                <p className='name'>{payeur} doit  {montant.toFixed(2)}€ à {beneficiaire}</p>
             </div>
 
         </>
     )
-    
 }
