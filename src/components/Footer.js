@@ -1,20 +1,23 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "../styles/Footer.css"
 
 export const  BudgetFooter = ({idBudget, deleteAction}) => {
 
     const navigate = useNavigate();
-    
+
+    const params = useParams();
+    const id_user = params.id_user;
+
     const onDeleteClick = () => {
         deleteAction();
-        navigate("/budgets");
+        navigate("/user/" + id_user + "/budgets");
     }
 
     return (
         <>
             <div className='footer' >
                 <button className='modifbutton'
-                        onClick={ () => navigate("/updatebudget" + idBudget) }>
+                        onClick={ () => navigate("/user/" + id_user + "/updatebudget/" + idBudget) }>
                     Modifier budget
                 </button>
                 
@@ -32,16 +35,19 @@ export const  ExpenseFooter = ({idBudget, idExpense, deleteAction}) => {
 
     const navigate = useNavigate();
 
+    const params = useParams();
+    const id_user = params.id_user;
+
     const onDeleteClick = () => {
         deleteAction();
-        navigate("/budget"+ idBudget +"/expenses");
+        navigate("/user/" + id_user + "/budget/" + idBudget + "/expenses");
     }
 
     return (
         <>
             <div className='footer' >
                 <button className='modifbutton'
-                        onClick={ () => navigate("/budget" + idBudget + "/updateexpense" + idExpense) }>
+                        onClick={ () => navigate("/user/" + id_user + "/budget/" + idBudget + "/updateexpense/" + idExpense) }>
                     Modifier dépense
                 </button>
                 

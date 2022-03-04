@@ -8,10 +8,10 @@ const UpdateBudget = () => {
     
     const [budget, setBudget] =  useState([]);
     const params = useParams();
-    const id_user = params.id_budget;
+    const id_budget = params.id_budget;
 
     const getBudget = async () => {
-        const {data} = await axios.get("http://localhost:8090/budget" + id_user);
+        const {data} = await axios.get("http://localhost:8090/budget/" + id_budget);
         setBudget(data);
     };
 

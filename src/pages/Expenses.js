@@ -23,12 +23,12 @@ const Expenses = () => {
     };
 
     const getBudget = async () => {
-        const {data} = await axios.get("http://localhost:8090/budget" + id_budget);
+        const {data} = await axios.get("http://localhost:8090/budget/" + id_budget);
         setBudget(data);
     };
 
     const deleteBudget = async () => {
-        const{data} = await axios.delete("http://localhost:8090/deletebudget" + id_budget);
+        const{data} = await axios.delete("http://localhost:8090/deletebudget/" + id_budget);
     }
 
     // Pas d'actualisation de la page MyBudgets après suppression d'un budget 

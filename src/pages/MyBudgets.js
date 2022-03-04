@@ -13,7 +13,7 @@ const MyBudgets = () => {
     const id_user = params.id_user;
 
     const getBudgets = async () => {
-        const {data} = await axios.get("http://localhost:8090/budgets");
+        const {data} = await axios.get("http://localhost:8090/user/" + id_user + "/budgets");
         setBudgets(data);
     };
 

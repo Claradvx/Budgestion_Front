@@ -6,12 +6,13 @@ import '../styles/Forms.css';
 
 const UpdateParticipants = () => {
 
-    const params = useParams();
-    const id = params.id_budget;
     const [budget, setBudget] =  useState([]);
 
+    const params = useParams();
+    const id_budget = params.id_budget;
+
     const getBudget = async () => {
-        const {data} = await axios.get("http://localhost:8090/budget" + id);
+        const {data} = await axios.get("http://localhost:8090/budget/" + id_budget);
         setBudget(data);
     };
 
