@@ -13,7 +13,6 @@ export const SignIn = () => {
                 <h1>Let's connect yourself !</h1>
 
                 <SignInForm />
-                
             </main>
         </>
     )
@@ -27,7 +26,6 @@ export const SignUp = () => {
                 <h1>Let's connect yourself !</h1>
 
                 <SignUpForm />
-                
             </main>
         </>
     )

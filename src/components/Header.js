@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { useNavigate, useParams } from 'react-router-dom';
+=======
+import { useParams, useNavigate } from 'react-router-dom';
+>>>>>>> 70aa0a6f3226e25f0efd94783d764bf6b38e5ea3
 import '../styles/Header.css';
 
 const Header = () => {
@@ -6,7 +10,11 @@ const Header = () => {
     let isConnected = false;
     const navigate = useNavigate();
 
+<<<<<<< HEAD
     const params = useParams(); 
+=======
+    const params = useParams();
+>>>>>>> 70aa0a6f3226e25f0efd94783d764bf6b38e5ea3
     const id_user = params.id_user;
 
     return (

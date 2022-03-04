@@ -1,12 +1,13 @@
 import '../styles/Forms.css';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 export const SignInForm = () => {
 
     const navigate = useNavigate();
 
+<<<<<<< HEAD
     const [user, setUser] = useState();
 
     const user_id = 1;
@@ -34,8 +35,36 @@ export const SignInForm = () => {
         console.log(user_id);
         
        navigate("/user/" + user_id + "/budgets")
+=======
+    const [user, setUser] = useState([]);
+
+    let id_user;
+    const validateUser = async (userLogin) => {
+        const {data} = await axios.post("http://localhost:8090/signin", userLogin);
+        id_user =  data.id;
+        setUser(data);
+>>>>>>> 70aa0a6f3226e25f0efd94783d764bf6b38e5ea3
     }
 
+
+    const login = (e) => {
+        e.preventDefault();
+        const form = e.target;
+
+        const userForm = {};
+        userForm["username"] = form[0].value;
+        userForm["password"] = form[1].value;
+        
+        
+        validateUser(userForm).then(() => navigate("/user/" + id_user + "/budgets"));
+        
+        // navigate("/user/" + user.id + "/budgets");
+    }
+
+    useEffect( () => {
+        setUser();
+    }, [user] );
+    
     return (
         <>
             <div className='box'>
@@ -64,7 +93,6 @@ export const SignUpForm = () => {
 
     const createUser = async (user) => {
         await axios.post("http://localhost:8090/saveuser", user);
-        console.log("Création réussi");
     };
 
     const handleRegistration = (e) => {
@@ -74,11 +102,12 @@ export const SignUpForm = () => {
         const user = {};
         user["firstname"] = form[0].value;
         user["name"] = form[1].value;
-        user["email"] = form[2].value;
+        user["username"] = form[2].value;
         user["password"] = form[3].value;
 
         console.log(user);
         createUser(user);
+        navigate("/signin");
     };
 
     
