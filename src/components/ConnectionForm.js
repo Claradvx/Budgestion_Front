@@ -65,11 +65,31 @@ export const SignUpForm = () => {
 
     const navigate = useNavigate();
 
+    const createUser = async (user) => {
+        await axios.post("http://localhost:8090/saveuser", user);
+        console.log("Création réussi");
+    };
+
+    const handleRegistration = (e) => {
+        e.preventDefault();
+        const form = e.target;
+
+        const user = {};
+        user["firstname"] = form[0].value;
+        user["name"] = form[1].value;
+        user["email"] = form[2].value;
+        user["password"] = form[3].value;
+
+        console.log(user);
+        createUser(user);
+    };
+
+    
     return (
         <>
             <div className = 'box'>
                 <h2>Sign up</h2>
-                <form >
+                <form onSubmit={handleRegistration}>
                     <div className = 'field'>
                         <input type = 'text' id = 'firstname' />
                         <label htmlFor = 'firstname' >Firstname</label>
@@ -87,7 +107,7 @@ export const SignUpForm = () => {
                         <label htmlFor = 'pwd' >Password</label>
                     </div>
                     <p>
-                        <button type = "submit" action = { () => navigate("/signin") }>Register</button>
+                        <button type = "submit">Register</button>
                     </p>
                 </form>
             </div>
