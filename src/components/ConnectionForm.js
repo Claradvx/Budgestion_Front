@@ -7,19 +7,22 @@ export const SignInForm = () => {
 
     const navigate = useNavigate();
 
-    const params = useParams();
-    const id_user = params.id_user;
+    const [user, setUser] = useState([]);
 
-    // const [user, setUser] = useState();
+    const validateUser = async (userLogin) => {
+        const {data} = await axios.post("http://localhost:8090/signin", userLogin);
+        setUser(data);
+    }
 
-    // const validateUser = async (userLogin) => {
-    //     const {data} = await axios.post("http://localhost:8090/signin", userLogin);
-    //     setUser(data);
-    // }
+    const login = (e) => {
+        e.preventDefault();
+        const form = e.target;
 
-    const login = () => {
-        // isConnected = true
-        navigate("/user/" + id_user + "/budgets")
+        user["username"] = form[0].value;
+        user["password"] = form[1].value;
+    
+        validateUser(user);
+        navigate("/user/" + user.id + "/budgets");
     }
 
     return (
@@ -52,7 +55,6 @@ export const SignUpForm = () => {
 
     const createUser = async (user) => {
         await axios.post("http://localhost:8090/saveuser", user);
-        console.log("Création réussi");
     };
 
     const handleRegistration = (e) => {
@@ -62,11 +64,12 @@ export const SignUpForm = () => {
         const user = {};
         user["firstname"] = form[0].value;
         user["name"] = form[1].value;
-        user["email"] = form[2].value;
+        user["username"] = form[2].value;
         user["password"] = form[3].value;
 
         console.log(user);
         createUser(user);
+        navigate("/signin");
     };
 
     

@@ -31,7 +31,7 @@ export const ScaleCard = ({payeur, montant, beneficiaire}) => {
     return (
         <>
             <div className='scale-card'>
-                <p className='name'>{payeur} doit  {montant.toFixed(2)}€ à {beneficiaire}</p>
+                <h3 className='name'>{payeur} doit  {montant.toFixed(2)}€ à {beneficiaire}</h3>
             </div>
 
         </>
