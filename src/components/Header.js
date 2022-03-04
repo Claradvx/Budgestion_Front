@@ -3,7 +3,7 @@ import '../styles/Header.css';
 
 const Header = () => {
 
-    let isConnected = true;
+    let isConnected = false;
     const navigate = useNavigate();
 
     const params = useParams(); 

@@ -12,14 +12,11 @@ export const SignInForm = () => {
     const user_id = 1;
 
     const getUser = async (username) => {
-        const {data} = await axios.get("http://localhost:8090/test/" + username);
+        const {data} = await axios.post("http://localhost:8090/signin");
         setUser(data);
     //    user_id = data.id;
         console.log( data);
     }
-
-
-
 
     const login = (e) => {
         e.preventDefault();
