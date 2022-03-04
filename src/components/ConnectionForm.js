@@ -1,4 +1,3 @@
-import Btn from './Btn.js';
 import '../styles/Forms.css';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
@@ -8,18 +7,31 @@ export const SignInForm = () => {
 
     const navigate = useNavigate();
 
-    // const [user, setUser] = useState();
+    const [user, setUser] = useState();
 
-    // const validateUser = async (userLogin) => {
-    //     const {data} = await axios.post("http://localhost:8090/signin", userLogin);
-    //     setUser(data);
-    // }
+    const getUser = async (username) => {
+        const {data} = await axios.post("http://localhost:8090/signin", username);
+        setUser(data);
+        console.log(user);
+    }
 
 
-    const login = () => {
 
-        navigate("/budgets")
 
+    const login = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const signinForm = {};
+
+        // for(let i = 0; i < 3 ; i++) {
+        //     const input = form[i];
+        //     signinForm["username"] = form[0].value;
+        //     signinForm["password"] = form[1].value;
+        // }
+        console.log(form[0].value);
+        getUser(form[0].value);
+        
+   //     navigate("/user/" + user.id + "/budgets")
     }
 
     return (
@@ -28,17 +40,15 @@ export const SignInForm = () => {
                 <h2>Sign in</h2>
                 <form onSubmit={login}>
                     <div className="field">
-                        <input type="text" id="email-signin" />
+                        <input type="text" id="email" />
                         <label htmlFor="email">Email</label>
                     </div>
                     <div className="field">
-                        <input type="password" id="pwd-signin" />
+                        <input type="password" id="pwd" />
                         <label htmlFor="pwd">Password</label>
                     </div>
                     <p>
-                    <Btn txt="OK" type="submit"></Btn>
-                    {/* Si connexion est correct il faudra changer la variable isConnected en true !
-                    Ce qui changera dans header vers le bouton Profile !*/}
+                    <button type="submit">OK</button>
                     </p>
                 </form>
             </div>
@@ -72,7 +82,7 @@ export const SignUpForm = () => {
                         <label htmlFor = "pwd" >Password</label>
                     </div>
                     <p>
-                        <Btn txt = "Register" type = "submit" action = { () => navigate("/signin") }></Btn>
+                        <button type = "submit" action = { () => navigate("/signin") }>Register</button>
                     </p>
                 </form>
             </div>
