@@ -9,10 +9,13 @@ export const SignInForm = () => {
 
     const [user, setUser] = useState();
 
+    const user_id = 1;
+
     const getUser = async (username) => {
-        const {data} = await axios.post("http://localhost:8090/signin", username);
+        const {data} = await axios.get("http://localhost:8090/test/" + username);
         setUser(data);
-        console.log(user);
+    //    user_id = data.id;
+        console.log( data);
     }
 
 
@@ -28,10 +31,12 @@ export const SignInForm = () => {
         //     signinForm["username"] = form[0].value;
         //     signinForm["password"] = form[1].value;
         // }
+        console.log("coucou");
         console.log(form[0].value);
         getUser(form[0].value);
+        console.log(user_id);
         
-   //     navigate("/user/" + user.id + "/budgets")
+       navigate("/user/" + user_id + "/budgets")
     }
 
     return (

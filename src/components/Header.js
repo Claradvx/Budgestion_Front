@@ -1,10 +1,13 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import '../styles/Header.css';
 
 const Header = () => {
 
-    let isConnected = false;
+    let isConnected = true;
     const navigate = useNavigate();
+
+    const params = useParams(); 
+    const id_user = params.id_user;
 
     return (
         <header>
@@ -25,7 +28,7 @@ const Header = () => {
                 </div>
                 :
                 <div className='connection'>
-                    <button onClick={ () => navigate("/profile") } >Profile</button>
+                    <button onClick={ () => navigate("/user/" + id_user + "/profile") } >Profile</button>
                 </div>
             }
              

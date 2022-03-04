@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
-const ShowExpenseForm = () => {
+const ShowExpense = () => {
 
     const params = useParams(); 
     const id_budget = params.id_budget; 
@@ -24,17 +24,17 @@ const ShowExpenseForm = () => {
     const [budget, setBudget] =  useState([]);
 
     const getParticipants = async () => {
-        const {data} = await axios.get("http://localhost:8090/budget" + id_budget + "/participants");
+        const {data} = await axios.get("http://localhost:8090/budget/" + id_budget + "/participants");
         setParticipants(data);
     };
 
     const getBudget = async () => {
-        const {data} = await axios.get("http://localhost:8090/budget" + id_budget);
+        const {data} = await axios.get("http://localhost:8090/budget/" + id_budget);
         setBudget(data);
     };
 
     const getExpense = async () => {
-        const {data} = await axios.get("http://localhost:8090/expense" + id_expense); 
+        const {data} = await axios.get("http://localhost:8090/expense/" + id_expense); 
         setExpense(data);
     };
 
@@ -78,4 +78,4 @@ const ShowExpenseForm = () => {
     )
 }
 
-export default ShowExpenseForm;
+export default ShowExpense;

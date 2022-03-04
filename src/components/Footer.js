@@ -60,3 +60,33 @@ export const  ExpenseFooter = ({idBudget, idExpense, deleteAction}) => {
         </>
     )
 }
+
+export const  UserFooter = ({iduser}) => {
+
+    const navigate = useNavigate();
+
+    const params = useParams();
+    const id_user = params.id_user;
+
+    const logout = () => {
+        //is connected => false
+        navigate("/signin");
+    }
+
+    return (
+        <>
+            <div className='footer' >
+                <button className='modifbutton'
+                        onClick={ () => navigate("/user/" + iduser + "/updateprofile") }>
+                    Modifier mon profil
+                </button>
+                
+                <button className='logout'
+                        onClick={logout} >
+                Déconnection
+                </button>
+
+            </div>
+        </>
+    )
+}

@@ -95,7 +95,7 @@ const UpdateExpenseForm = () => {
                 
                     <div className='field'>
                         <input type='text' id='name' />
-                        <label htmlFor="name">Nom de la dépenset</label>
+                        <label htmlFor="name">Nom de la dépense</label>
                     </div>
 
                     <div className='field'>

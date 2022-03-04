@@ -16,6 +16,7 @@ import SaveParticipants from './pages/SaveParticipants';
 
 import UpdateParticipants from './pages/UpdateParticipants';
 import UpdateExpense from './pages/UpdateExpense';
+import UpdateProfile from './pages/UpdateProfile';
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/user/:id_user/profile" element={<Profile />} />
+            <Route path="/user/:id_user/updateprofile" element={<UpdateProfile />} />
             <Route path="/user/:id_user/budgets" element={<MyBudgets />} />
             <Route path="/user/:id_user/savebudget" element={<SaveBudget />} />
             <Route path="/user/:id_user/savebudget/:id_budget/participants" element={<SaveParticipants/>} />
