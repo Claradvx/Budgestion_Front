@@ -13,7 +13,7 @@ import {SignIn, SignUp} from './pages/Connection';
 import Expense from './pages/Expense';
 import UpdateBudget from './pages/UpdateBudget';
 import SaveParticipants from './pages/SaveParticipants';
-import NameForm from './components/test';
+
 import UpdateParticipants from './pages/UpdateParticipants';
 import UpdateExpense from './pages/UpdateExpense';
 
@@ -42,8 +42,6 @@ function App() {
             <Route path="/budget:id_budget/saveexpense" element={<SaveExpense />} />
             <Route path="/budget:id_budget/updateexpense:id_expense" element={<UpdateExpense />} />
             <Route path="/budget:id_budget/scale" element={<Scale />}/>
-
-            <Route path="/test" element={<NameForm />} />
 
             <Route path="*" element={<NotFound />}/>
 
