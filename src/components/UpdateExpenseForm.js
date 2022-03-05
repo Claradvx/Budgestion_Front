@@ -8,15 +8,13 @@ const UpdateExpenseForm = () => {
 
     const navigate = useNavigate();
 
-    const [state, setState] = useState({value: ""});
-
-    const [checkedOne, setCheckedOne] = useState(false);
     const [inputName, setInputName] = useState("");
     const [inputDescription, setInputDescription] = useState("");
     const [inputMontant, setInputMontant] = useState(0);
     const [payeur, setPayeur] =  useState([]);
     const [participants, setParticipants] =  useState([]);
-    const [expense, setExpense] =  useState([]);
+    const [id_payeur, setIdPayeur] =  useState(0);
+    const [state, setState] = useState({value: ""});
     
     const params = useParams(); 
     const id_budget = params.id_budget;
@@ -25,56 +23,60 @@ const UpdateExpenseForm = () => {
 
     const handleChangePayeur = (e) => {
         setState({value: e.target.value});
+        setIdPayeur(e.target.value);
+        getPayeur(e.target.value);
     };
   
-    const handleChangeBeneficiaires = (e) => {
-        setCheckedOne(!checkedOne);
-    };
 
     const getParticipants = async () => {
         const {data} = await axios.get("http://localhost:8090/budget/" + id_budget + "/participants");
         setParticipants(data);
     };
 
-    const getPayeur = async (id_payeur) => {
-        const {data} = await axios.get("http://localhost:8090/participant/" + id_payeur);
-        console.log(data);
-        setPayeur(data);
-    };
-
     const getExpense = async () => {
         const {data} = await axios.get("http://localhost:8090/expense/" + id_expense);
-        setExpense(data);
         setInputName(document.getElementById('name').value=data.name);
         setInputDescription(document.getElementById('description').value=data.description);
         setInputMontant(document.getElementById('montant').value=data.montant);
-      //  setState(data.payeur.username);
-        console.log("expense.payeur = " + data.payeur.username);
+        setState({value: data.payeur.id});     
     };
 
-    const updateExpense = async (expense) => {
-        const {data} = await axios.put("http://localhost:8090/updateexpense", expense); 
+    const getPayeur = async (id_payeur) => {
+        const {data} = await axios.get("http://localhost:8090/participant/" + id_payeur);
+        setPayeur(data);
+    };
+
+    const updateExpense = async (expenseForm) => {
+        const {data} = await axios.put("http://localhost:8090/updateexpense", expenseForm); 
         getExpense(data);
     };
  
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        const beneficiaires = ([]);
+
         const form = e.target;
         const expenseForm = {};
-
-        console.log(payeur);
-
+       
         expenseForm["id"] = id_expense;
         expenseForm["name"] = form[0].value;
         expenseForm["description"] = form[1].value;
         expenseForm["montant"] = form[2].value;
-        //récupérer l'id du payeur ave la liste déroulante?
-        expenseForm["payeur"] = payeur;
-        //participants.map (p => if checked alors push dans const beneficiaires)
-        //modifier participants par bénéficiaires
-        expenseForm["beneficiaires"] = participants;
 
-        console.log(expenseForm);
+        if (payeur.id != undefined) {
+            expenseForm["payeur"] = payeur;
+        }
+
+        participants.map( p => {
+            for(let i = 4; i < form.length-1 ; i++) {
+                if (p.username === form[i].id && form[i].checked) {
+                    beneficiaires.push(p);
+                }
+            }
+        })
+   
+        expenseForm["beneficiaires"] = beneficiaires;
 
         updateExpense(expenseForm);
 
@@ -82,7 +84,6 @@ const UpdateExpenseForm = () => {
     }
 
     useEffect( () => {
-        getPayeur(state.value);
         getParticipants();
         getExpense();
     }, []); 
@@ -119,8 +120,8 @@ const UpdateExpenseForm = () => {
                         <FormGroup>
                             {participants.map( p => (
                                                      <li id='participants' key={p.id}>
-                                                    <FormControlLabel key={p.id} control={<Checkbox  value={checkedOne} id={p.username}
-                                                     onChange={handleChangeBeneficiaires} />} label={p.username} />
+                                                    <FormControlLabel key={p.id} control={<Checkbox  id={p.username}
+                                                    defaultChecked/>} label={p.username} />
                                                      </li> 
                                                      ))}
                         </FormGroup>

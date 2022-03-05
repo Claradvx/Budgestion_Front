@@ -2,7 +2,8 @@ import '../styles/Forms.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { ContentCutOutlined } from '@mui/icons-material';
+import { Checkbox, FormControlLabel, FormGroup } from '@mui/material';
+import { setUseProxies } from 'immer';
 
 const UpdateParticipantsForm = () => {
 
@@ -10,14 +11,21 @@ const UpdateParticipantsForm = () => {
 
     const newparticipant = {};
 
-    const [newParticipants, setNewParticipants] =  useState([]);
     const [inputUsername, setInputUsername] =  useState([]);
     const [participants, setParticipants] =  useState([]);
     const [budget, setBudget] =  useState([]);
+    const [user, setUser] =  useState([]);
     const [participant, setParticipant] =  useState([]);
+    const [participantUser, setParticipantUser] = useState([]);
     
     const params = useParams(); 
     const id_budget = params.id_budget;
+    const id_user = params.id_user;
+
+    const getUser = async () => {
+        const {data} = await axios.get("http://localhost:8090/user/" + id_user);
+        setUser(data);
+    }
 
     const getParticipants = async () => {
         const {data} = await axios.get("http://localhost:8090/budget/" + id_budget + "/participants");
@@ -32,7 +40,7 @@ const UpdateParticipantsForm = () => {
     };
 
     const updateBudget = async (budget) => {
-        const {data} = await axios.put("http://localhost:8090/updatebudget/", budget); 
+        const {data} = await axios.put("http://localhost:8090/updatebudget", budget); 
         getBudget(data);
     };
 
@@ -43,6 +51,7 @@ const UpdateParticipantsForm = () => {
     };
 
     useEffect( () => {
+        getUser();
         getParticipants();
         getBudget();
     }, [participants.lenght]); 
@@ -50,47 +59,43 @@ const UpdateParticipantsForm = () => {
 
     const SaveParticipant = (e) => {
         e.preventDefault();
-        console.log(e);
         const form = e.target.form;
-        
-        console.log(form);
-        console.log("input : " + form[form.length-3].value);
-        newparticipant["username"] = form[form.length-3].value;
+
+        newparticipant["username"] = form[0].value;
         newparticipant["budget"] = budget;
-    //    setParticipant(newparticipant);
+        participants.push(newparticipant);
         createParticipant(newparticipant);
         
-        e.target.value = '';
+        form[0].value = '';
     }
  
     const handleSubmit = (e) => {
         e.preventDefault();
-        const form = e.target;
-        const participantForm =         {
-            "id": null,
-            "username": null,
-            "budget": {}
-        };
+        // const form = e.target;
+        // const participantForm =         {
+        //     "id": null,
+        //     "username": null,
+        //     "budget": {}
+        // };
         console.log(e);
         console.log("coucou");
 
-        for(let i = 0; i < form.length-1 ; i++) {
-            const id = form[i].id;
-            const username = form[i].value;
-            participantForm["id"] = id;
-            participantForm["username"] = username;
-            participantForm["budget"] = budget;
-            console.log(form[i].id + form[i].value);
-            console.log(participantForm);
-      //      newParticipants.push(participantForm);
-            console.log(newParticipants);
-      //     setParticipants(newParticipants);
-        }
+    //     for(let i = 0; i < form.length-1 ; i++) {
+    //         const id = form[i].id;
+    //         const username = form[i].value;
+    //         participantForm["id"] = id;
+    //         participantForm["username"] = username;
+    //         participantForm["budget"] = budget;
+    //         console.log(form[i].id + form[i].value);
+    //         console.log(participantForm);
+    //   //      newParticipants.push(participantForm);
+    //         console.log(newParticipants);
+    //   //     setParticipants(newParticipants);
+    //     }
 
         const budgetForm = {};
         budgetForm["id"] = id_budget;
-        budgetForm["membersBudget"] = newParticipants;
-        console.log(newParticipants);
+        budgetForm["membersBudget"] = participants;
         updateBudget(budgetForm);
 
         // navigate("/budgets");
@@ -103,12 +108,34 @@ const UpdateParticipantsForm = () => {
             <div className='box'>
                 <form onSubmit={handleSubmit}>
                     
+                    <ul>
+                        <FormGroup>
+                            {participants.map( p => (
+                                                     <li id='participants'>
+                                                    <FormControlLabel key={p.id} control={<Checkbox id={p.username}
+                                                            // defaultChecked={(p.user.id === id_user) ? 
+                                                            // true : false}
+                                                    />} 
+                        label={p.username} />
+                                                     </li> 
+                                                     ))}
+                        </FormGroup>
+
+                        </ul>                      
+
+                    <p>
+                    <button type='submit'>OK</button>
+                    </p>
+
+                </form>
+            </div>
+
+
+            <div className='box'>
+                <form onSubmit={handleSubmit}>
+                    
                     <div className='field'>
-                        <ul>
-                            {participants.map( p => 
-                            <li id='participants' key={p.id}>
-                                <input type='text' id={p.id}/>
-                            </li> )}
+                    <ul>         
                             <li id='participants'>
                             <div className='addparticipant'>
                                     <input type='text' id='participant' />
@@ -118,10 +145,6 @@ const UpdateParticipantsForm = () => {
                         </ul>
                         
                     </div>                        
-
-                    <p>
-                    <button type='submit'>OK</button>
-                    </p>
 
                 </form>
             </div>
