@@ -48,7 +48,6 @@ const UpdateExpenseForm = () => {
 
     const updateExpense = async (expenseForm) => {
         const {data} = await axios.put("http://localhost:8090/updateexpense", expenseForm); 
-        getExpense(data);
     };
  
     const handleSubmit = (e) => {

@@ -7,20 +7,38 @@ const UpdateBudgetForm = () => {
 
     const navigate = useNavigate();
 
-    const [inputName, setInputName] = useState("");
-    const [inputDescription, setInputDescription] = useState("");
-    const [inputUser, setInputUser] = useState("");
-    
-    const [participants, setParticipants] =  useState([]);
-    const [budget, setBudget] =  useState([]);
-    
     const params = useParams(); 
     const id_budget = params.id_budget;
     const id_user = params.id_user;
 
+    const [inputName, setInputName] = useState("");
+    const [inputDescription, setInputDescription] = useState("");
+    const [inputParticipantUser, setInputParticipantUser] = useState("");
+    
+    const [user, setUser] =  useState([]);
+    const [participants, setParticipants] =  useState([]);
+    const [budget, setBudget] =  useState([]);
+    const [participantUser, setParticipantUser] = useState([]);
+
+
+    const getUser = async () => {
+        const {data} = await axios.get("http://localhost:8090/user/" + id_user);
+        setUser(data);
+    }
+
     const getParticipants = async () => {
         const {data} = await axios.get("http://localhost:8090/budget/" + id_budget + "/participants");
         setParticipants(data);
+    };
+
+    const getParticipantUser = async () => {
+        const {data} = await axios.get("http://localhost:8090/user/" + id_user + "/budget/" + id_budget + "/participant");
+        setParticipantUser(data);
+        setInputParticipantUser(document.getElementById("username").value=data.username);
+    };
+
+    const updateParticipantUser = async (participantUserForm) => {
+        const {data} = await axios.put("http://localhost:8090/updateparticipant", participantUserForm);
     };
 
     const getBudget = async () => {
@@ -28,20 +46,25 @@ const UpdateBudgetForm = () => {
         setBudget(data);
         setInputName(document.getElementById('name').value=data.name);
         setInputDescription(document.getElementById('description').value=data.description);
-        setInputUser(document.getElementById("username").value='En attente de la gestion des users');
     };
 
     const updateBudget = async (budget) => {
         const {data} = await axios.put("http://localhost:8090/updatebudget", budget); 
-        getBudget(data);
     };
  
     const handleSubmit = (e) => {
         e.preventDefault();
-        const form = e.target;
         const submitterButton = e.nativeEvent.submitter.id;
-        console.log(submitterButton);
+        const form = e.target;
         const budgetForm = {};
+
+        const participantUserForm = {};
+
+        participantUserForm["id"] = participantUser.id;
+        participantUserForm["username"] = form[2].value;
+        participantUserForm["budget"] = participantUser.budget;
+        participantUserForm["user"] = participantUser.user;
+        updateParticipantUser(participantUserForm);
 
         budgetForm["id"] = id_budget;
         budgetForm["name"] = form[0].value;
@@ -62,10 +85,12 @@ const UpdateBudgetForm = () => {
     }
 
     useEffect( () => {
-        getParticipants();
         getBudget();
+        getParticipants();
+        getParticipantUser();
         setInputName();
         setInputDescription();
+        setInputParticipantUser();
     }, []); 
 
 
