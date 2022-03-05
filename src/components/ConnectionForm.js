@@ -7,35 +7,6 @@ export const SignInForm = () => {
 
     const navigate = useNavigate();
 
-<<<<<<< HEAD
-    const [user, setUser] = useState();
-
-    const user_id = 1;
-
-    const getUser = async (username) => {
-        const {data} = await axios.post("http://localhost:8090/signin");
-        setUser(data);
-    //    user_id = data.id;
-        console.log( data);
-    }
-
-    const login = (e) => {
-        e.preventDefault();
-        const form = e.target;
-        const signinForm = {};
-
-        // for(let i = 0; i < 3 ; i++) {
-        //     const input = form[i];
-        //     signinForm["username"] = form[0].value;
-        //     signinForm["password"] = form[1].value;
-        // }
-        console.log("coucou");
-        console.log(form[0].value);
-        getUser(form[0].value);
-        console.log(user_id);
-        
-       navigate("/user/" + user_id + "/budgets")
-=======
     const [user, setUser] = useState([]);
 
     let id_user;
@@ -43,7 +14,6 @@ export const SignInForm = () => {
         const {data} = await axios.post("http://localhost:8090/signin", userLogin);
         id_user =  data.id;
         setUser(data);
->>>>>>> 70aa0a6f3226e25f0efd94783d764bf6b38e5ea3
     }
 
 
