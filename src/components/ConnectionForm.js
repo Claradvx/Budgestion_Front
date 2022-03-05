@@ -11,8 +11,9 @@ export const SignInForm = () => {
 
     let id_user;
     const validateUser = async (userLogin) => {
-        const {data} = await axios.post("http://localhost:8090/signin", userLogin);
+        const {data} = await axios.post("http://localhost:8090/login", userLogin);
         id_user =  data.id;
+        console.log("après post : ", data);
         setUser(data);
     }
 
@@ -24,7 +25,6 @@ export const SignInForm = () => {
         const userForm = {};
         userForm["username"] = form[0].value;
         userForm["password"] = form[1].value;
-        
         
         validateUser(userForm).then(() => navigate("/user/" + id_user + "/budgets"));
         

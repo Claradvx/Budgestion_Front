@@ -1,4 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom';
+import { default as logo } from '../assets/images/Budgestion_logo_fondBleu.svg';
+import { default as backArrow } from '../assets/images/BackLeftArrow.svg';
 import '../styles/Header.css';
 
 const Header = () => {
@@ -13,11 +15,11 @@ const Header = () => {
         <header>
 
             <div className='backdiv'>
-                <img className='back' src='images/BackLeftArrow.svg' alt='Back navigation' onClick={ () => navigate(-1)} />
+                <img className='back' src={backArrow} alt='Back navigation' onClick={ () => navigate(-1)} />
             </div>
 
             <img className='logo' 
-                src='images/Budgestion_logo_fondBleu.svg' 
+                src={logo}
                 alt='Budgestion' 
                 onClick={ () => navigate("/") } />
 
