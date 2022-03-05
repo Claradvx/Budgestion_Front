@@ -32,18 +32,18 @@ const UpdateExpenseForm = () => {
     };
 
     const getParticipants = async () => {
-        const {data} = await axios.get("http://localhost:8090/budget" + id_budget + "/participants");
+        const {data} = await axios.get("http://localhost:8090/budget/" + id_budget + "/participants");
         setParticipants(data);
     };
 
     const getPayeur = async (id_payeur) => {
-        const {data} = await axios.get("http://localhost:8090/participant" + id_payeur);
+        const {data} = await axios.get("http://localhost:8090/participant/" + id_payeur);
         console.log(data);
         setPayeur(data);
     };
 
     const getExpense = async () => {
-        const {data} = await axios.get("http://localhost:8090/expense" + id_expense);
+        const {data} = await axios.get("http://localhost:8090/expense/" + id_expense);
         setExpense(data);
         setInputName(document.getElementById('name').value=data.name);
         setInputDescription(document.getElementById('description').value=data.description);
@@ -78,7 +78,7 @@ const UpdateExpenseForm = () => {
 
         updateExpense(expenseForm);
 
-        navigate("/user/" + id_user + "/budget" + id_budget + "/expenses");
+        navigate("/user/" + id_user + "/budget/" + id_budget + "/expenses");
     }
 
     useEffect( () => {
@@ -95,7 +95,7 @@ const UpdateExpenseForm = () => {
                 
                     <div className='field'>
                         <input type='text' id='name' />
-                        <label htmlFor="name">Nom de la dépenset</label>
+                        <label htmlFor="name">Nom de la dépense</label>
                     </div>
 
                     <div className='field'>

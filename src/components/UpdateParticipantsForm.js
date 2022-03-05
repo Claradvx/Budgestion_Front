@@ -20,24 +20,24 @@ const UpdateParticipantsForm = () => {
     const id_budget = params.id_budget;
 
     const getParticipants = async () => {
-        const {data} = await axios.get("http://localhost:8090/budget" + id_budget + "/participants");
+        const {data} = await axios.get("http://localhost:8090/budget/" + id_budget + "/participants");
         setParticipants(data);
         participants.map(p => 
             setInputUsername(document.getElementById(p.id).value=p.username));
     };
 
     const getBudget = async () => {
-        const {data} = await axios.get("http://localhost:8090/budget" + id_budget);
+        const {data} = await axios.get("http://localhost:8090/budget/" + id_budget);
         setBudget(data);
     };
 
     const updateBudget = async (budget) => {
-        const {data} = await axios.put("http://localhost:8090/updatebudget", budget); 
+        const {data} = await axios.put("http://localhost:8090/updatebudget/", budget); 
         getBudget(data);
     };
 
     const createParticipant = async (participant) => {
-        const {data} = await axios.post("http://localhost:8090/saveparticipant", participant);
+        const {data} = await axios.post("http://localhost:8090/saveparticipant/", participant);
         setParticipant(data);
         const p = data;
     };

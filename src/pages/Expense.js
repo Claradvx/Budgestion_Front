@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { ExpenseFooter } from '../components/Footer';
-import ShowExpenseForm from '../components/ShowExpense';
+import ShowExpense from '../components/ShowExpense';
 
 const Expense = () => {
 
@@ -30,7 +30,7 @@ const Expense = () => {
         <>
             <h1>La dépense : "{expense.name}" </h1>
 
-            <ShowExpenseForm />
+            <ShowExpense />
 
             <ExpenseFooter idBudget={id_budget} idExpense={id_expense} deleteAction={deleteExpense} />
         
