@@ -19,12 +19,12 @@ const UpdateBudgetForm = () => {
     const id_user = params.id_user;
 
     const getParticipants = async () => {
-        const {data} = await axios.get("http://localhost:8090/budget" + id_budget + "/participants");
+        const {data} = await axios.get("http://localhost:8090/budget/" + id_budget + "/participants");
         setParticipants(data);
     };
 
     const getBudget = async () => {
-        const {data} = await axios.get("http://localhost:8090/budget" + id_budget);
+        const {data} = await axios.get("http://localhost:8090/budget/" + id_budget);
         setBudget(data);
         setInputName(document.getElementById('name').value=data.name);
         setInputDescription(document.getElementById('description').value=data.description);
@@ -57,7 +57,7 @@ const UpdateBudgetForm = () => {
         if (submitterButton === "modifBudget") {
             navigate("/user/" + id_user + "/budgets");
         } else {
-            navigate("/user/" + id_user + "/updatebudget" + id_budget + "/participants" )
+            navigate("/user/" + id_user + "/updatebudget/" + id_budget + "/participants" )
         }
     }
 
