@@ -13,23 +13,19 @@ export const SignInForm = () => {
     const validateUser = async (userLogin) => {
         const {data} = await axios.post("http://localhost:8090/signin", userLogin);
         id_user =  data.id;
-        console.log("après post : ", data);
         setUser(data);
     }
-
 
     const login = (e) => {
         e.preventDefault();
         const form = e.target;
 
-        console.log(e)
         const userForm = {};
         userForm["username"] = form[0].value;
         userForm["password"] = form[1].value;
-        
-        validateUser(userForm).then(() => navigate("/user/" + id_user + "/budgets"));
-        
-        // navigate("/user/" + user.id + "/budgets");
+
+        validateUser(userForm)
+            .then(() => navigate("/user/" + id_user + "/budgets"));
     }
 
     useEffect( () => {
@@ -78,7 +74,6 @@ export const SignUpForm = () => {
         user["username"] = form[2].value;
         user["password"] = form[3].value;
 
-        console.log(user);
         createUser(user);
         navigate("/signin");
     };

@@ -25,7 +25,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         
-        <Header/>
+        <Header />
 
         <div className="main">
           <Routes>
