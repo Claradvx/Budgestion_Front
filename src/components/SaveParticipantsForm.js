@@ -7,7 +7,7 @@ const SaveParticipantsForm = () => {
     
     const navigate = useNavigate();
 
-    const [inputUsername, setInputUsername] =  useState("");
+    // const [inputUsername, setInputUsername] =  useState("");
     const [participants, setParticipants] =  useState([]);
     const [budget, setBudget] =  useState([]);
     
@@ -27,8 +27,8 @@ const SaveParticipantsForm = () => {
     const getParticipants = async () => {
         const {data} = await axios.get("http://localhost:8090/budget/" + id_budget + "/participants");
         setParticipants(data);
-        participants.map(p => {
-            setInputUsername(document.getElementById(p.id).value=p.username)});
+        // participants.map(p => {
+        //     setInputUsername(document.getElementById(p.id).value=p.username)});
     };
 
     const getBudget = async () => {
@@ -46,6 +46,7 @@ const SaveParticipantsForm = () => {
 
     const createParticipant = async (participant) => {
         const {data} = await axios.post("http://localhost:8090/saveparticipant/", participant);
+        setParticipants(participants);
     };
 
 
@@ -102,7 +103,8 @@ const SaveParticipantsForm = () => {
                     <ul>
                             {participants.map( p => (
                                                      <li className='participants' key={p.id}>
-                                                         <input type='text' id={p.id}/>
+                                                         {p.username}
+                                                         {/* <input type='text' id={p.id}/> */}
                                                      </li>
                                                      ))}
                         </ul>                      

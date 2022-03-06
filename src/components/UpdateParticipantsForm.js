@@ -7,7 +7,7 @@ const UpdateParticipantsForm = () => {
 
     const navigate = useNavigate();
 
-    const [inputUsername, setInputUsername] =  useState([]);
+  //  const [inputUsername, setInputUsername] =  useState([]);
     const [participants, setParticipants] =  useState([]);
     const [budget, setBudget] =  useState([]);
     
@@ -39,13 +39,8 @@ const UpdateParticipantsForm = () => {
 
     const createParticipant = async (newparticipant) => {
         const {data} = await axios.post("http://localhost:8090/saveparticipant/", newparticipant);
-        
+        setParticipants(participants);
     };
-
-    useEffect( () => {
-        getParticipants();
-        getBudget();
-    }, []); 
 
 
 
@@ -59,7 +54,7 @@ const UpdateParticipantsForm = () => {
         newparticipant["budget"] = budget;
         participants.push(newparticipant);
         createParticipant(newparticipant);
-        
+        getParticipants();
         form[0].value = '';
     }
  
@@ -89,7 +84,10 @@ const UpdateParticipantsForm = () => {
         navigate("/user/" + id_user + "/budgets");
     }
 
-
+    useEffect( () => {
+        getParticipants();
+        getBudget();
+    }, []); 
 
     return (
         <> 
@@ -98,7 +96,7 @@ const UpdateParticipantsForm = () => {
                     
                     <ul>
                             {participants.map( p => (
-                                                     <li id='participants' key={p.id}>
+                                                     <li className='participants' key={p.id}>
                                                          {p.username}
                                                      </li>
                                                      ))}

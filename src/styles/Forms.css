@@ -11,18 +11,30 @@
     border-radius: 40px;
 }
 
+li.participants {
+  list-style-type: none;
+  color: var(--white);
+  text-align: left;
+  display:flex;
+  margin-left: 5%;
+  margin-bottom: 5px;
+}
+
 li#participants {
     list-style-type: none;
     color: var(--white);
-    text-align: left;
+    text-align: center;
     display:flex;
     margin-left: 5%;
+    margin-bottom: 5px;
 }
 
 li#participants #text{
   justify-content: center;
   color: var(--gold);
 }
+
+
 
 .checkbox #label{
   color: var(--white);
@@ -35,7 +47,6 @@ li#participants #text{
     text-align: center;
 }
   
-
 
 .box .field {
     position: relative;

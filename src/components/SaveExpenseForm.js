@@ -18,6 +18,7 @@ const SaveExpenseForm = () => {
     
     const params = useParams(); 
     const id_budget = params.id_budget;
+    const id_user = params.id_user;
 
     const handleChangePayeur = (e) => {
         setState({value: e.target.value});
@@ -70,7 +71,7 @@ const SaveExpenseForm = () => {
 
         saveExpense(expenseForm);
 
-      //  navigate("/user/" + id_user + "/budget/" + id_budget + "/expenses");
+        navigate("/user/" + id_user + "/budget/" + id_budget + "/expenses");
     }
 
     useEffect( () => {
