@@ -11,7 +11,7 @@ export const SignInForm = () => {
 
     let id_user;
     const validateUser = async (userLogin) => {
-        const {data} = await axios.post("http://localhost:8090/login", userLogin);
+        const {data} = await axios.post("http://localhost:8090/signin", userLogin);
         id_user =  data.id;
         console.log("après post : ", data);
         setUser(data);
