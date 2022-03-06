@@ -82,7 +82,7 @@ const UpdateParticipantsForm = () => {
         budgetForm["membersBudget"] = participants;
         updateBudget(budgetForm);
 
-        navigate("user/" + id_user + "/budgets");
+        navigate("/user/" + id_user + "/budgets");
     }
 
 
