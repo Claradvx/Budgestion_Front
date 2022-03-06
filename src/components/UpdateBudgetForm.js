@@ -34,6 +34,7 @@ const UpdateBudgetForm = () => {
     const getParticipantUser = async () => {
         const {data} = await axios.get("http://localhost:8090/user/" + id_user + "/budget/" + id_budget + "/participant");
         setParticipantUser(data);
+        console.log(data.username);
         setInputParticipantUser(document.getElementById("username").value=data.username);
     };
 
@@ -85,9 +86,9 @@ const UpdateBudgetForm = () => {
     }
 
     useEffect( () => {
+        getParticipantUser();
         getBudget();
         getParticipants();
-        getParticipantUser();
         setInputName();
         setInputDescription();
         setInputParticipantUser();
