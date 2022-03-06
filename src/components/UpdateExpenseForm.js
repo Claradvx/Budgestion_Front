@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Checkbox, FormControlLabel, FormGroup } from '@mui/material';
+import { contains } from 'check-types';
 
 const UpdateExpenseForm = () => {
 
@@ -12,6 +13,7 @@ const UpdateExpenseForm = () => {
     const [inputDescription, setInputDescription] = useState("");
     const [inputMontant, setInputMontant] = useState(0);
     const [payeur, setPayeur] =  useState([]);
+    const [beneficiaires, setBeneficiaires] =  useState([]);
     const [participants, setParticipants] =  useState([]);
     const [id_payeur, setIdPayeur] =  useState(0);
     const [state, setState] = useState({value: ""});
@@ -20,13 +22,6 @@ const UpdateExpenseForm = () => {
     const id_budget = params.id_budget;
     const id_expense = params.id_expense;
     const id_user = params.id_user;
-
-    const handleChangePayeur = (e) => {
-        setState({value: e.target.value});
-        setIdPayeur(e.target.value);
-        getPayeur(e.target.value);
-    };
-  
 
     const getParticipants = async () => {
         const {data} = await axios.get("http://localhost:8090/budget/" + id_budget + "/participants");
@@ -38,6 +33,11 @@ const UpdateExpenseForm = () => {
         setInputName(document.getElementById('name').value=data.name);
         setInputDescription(document.getElementById('description').value=data.description);
         setInputMontant(document.getElementById('montant').value=data.montant);
+        //Ajout de cette ligne pour récupérer les bénéficiaires de la dépense à l'état du chargement de la page
+        //Que l'on parcourera pour mettre l'etat des checkbox leur correspondant à checked
+        setBeneficiaires(document.getElementById('beneficiaires').value=data.beneficiaires); 
+        console.log("data   : : : ", data);
+        console.log("data   : : : ", data.beneficiaires);
         setState({value: data.payeur.id});     
     };
 
@@ -50,12 +50,16 @@ const UpdateExpenseForm = () => {
         const {data} = await axios.put("http://localhost:8090/updateexpense", expenseForm); 
     };
  
+    const handleChangePayeur = (e) => {
+        setState({value: e.target.value});
+        setIdPayeur(e.target.value);
+        getPayeur(e.target.value);
+    };
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        const beneficiaires = ([]);
-
         const form = e.target;
+
+        const beneficiaires_selected = [{}];
         const expenseForm = {};
        
         expenseForm["id"] = id_expense;
@@ -70,16 +74,15 @@ const UpdateExpenseForm = () => {
         participants.map( p => {
             for(let i = 4; i < form.length-1 ; i++) {
                 if (p.username === form[i].id && form[i].checked) {
-                    beneficiaires.push(p);
+                    beneficiaires_selected.push(p);
                 }
             }
         })
-   
-        expenseForm["beneficiaires"] = beneficiaires;
+        expenseForm["beneficiaires"] = beneficiaires_selected;
 
         updateExpense(expenseForm);
 
-        navigate("/user/" + id_user + "/budget/" + id_budget + "/expenses");
+        //navigate("/user/" + id_user + "/budget/" + id_budget + "/expenses");
     }
 
     useEffect( () => {
@@ -118,11 +121,13 @@ const UpdateExpenseForm = () => {
                     <ul>
                         <FormGroup>
                             {participants.map( p => (
-                                                     <li id='participants' key={p.id}>
-                                                    <FormControlLabel key={p.id} control={<Checkbox  id={p.username}
-                                                    defaultChecked/>} label={p.username} />
-                                                     </li> 
-                                                     ))}
+                                <li id='participants' key={p.id}>
+                                    <FormControlLabel key={p.id} control={
+                                        <Checkbox  id={p.username}
+                                                checked={true}/>} 
+                                        label={p.username} />
+                                </li> 
+                            ))}
                         </FormGroup>
                         </ul>   
 
