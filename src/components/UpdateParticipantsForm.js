@@ -18,9 +18,9 @@ const UpdateParticipantsForm = () => {
     const getParticipants = async () => {
         const {data} = await axios.get("http://localhost:8090/budget/" + id_budget + "/participants");
         setParticipants(data);
-        participants.map(p => {
-            console.log(p.username, " id : ", p.id)
-            setInputUsername(document.getElementById(p.id).value=p.username)});
+   //     participants.map(p => {
+   //         console.log(p.username, " id : ", p.id)
+  //          setInputUsername(document.getElementById(p.id).value=p.username)});
     };
 
     const getBudget = async () => {
@@ -37,14 +37,17 @@ const UpdateParticipantsForm = () => {
         const {data} = await axios.put("http://localhost:8090/updateparticipant", participantForm);
     };
 
-    const createParticipant = async (participant) => {
-        const {data} = await axios.post("http://localhost:8090/saveparticipant/", participant);
+    const createParticipant = async (newparticipant) => {
+        const {data} = await axios.post("http://localhost:8090/saveparticipant/", newparticipant);
+        
     };
 
     useEffect( () => {
         getParticipants();
         getBudget();
-    }, [participants.lenght]); 
+    }, []); 
+
+
 
 
     const SaveParticipant = (e) => {
@@ -95,8 +98,8 @@ const UpdateParticipantsForm = () => {
                     
                     <ul>
                             {participants.map( p => (
-                                                     <li className='participants' key={p.id}>
-                                                         <input type='text' id={p.id}/>
+                                                     <li id='participants' key={p.id}>
+                                                         {p.username}
                                                      </li>
                                                      ))}
                         </ul>                      
