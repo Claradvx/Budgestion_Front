@@ -151,6 +151,12 @@ li#participants #text{
   margin-bottom: 40px;
 }
 
+.showbox form {
+  width: 100%;
+  padding: 0;
+
+}
+
 .showbox h2 {
 
   padding: 0;

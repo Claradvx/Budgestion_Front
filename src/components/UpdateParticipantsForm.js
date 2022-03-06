@@ -28,8 +28,9 @@ const UpdateParticipantsForm = () => {
         setBudget(data);
     };
 
-    const updateBudget = async (budget) => {
-        const {data} = await axios.put("http://localhost:8090/updatebudget", budget); 
+    const updateBudget = async (budgetForm) => {
+        const {data} = await axios.put("http://localhost:8090/updatebudget", budgetForm); 
+        navigate("/user/" + id_user + "/budgets");
     };
 
     const updateParticipant = async (participantForm) => {
@@ -74,13 +75,16 @@ const UpdateParticipantsForm = () => {
             console.log(participantForm);
             updateParticipant(participantForm);
         }
-
+       
         const budgetForm = {};
         budgetForm["id"] = id_budget;
+        budgetForm["name"] = budget.name;
+        budgetForm["description"] = budget.description;
         budgetForm["membersBudget"] = participants;
+        console.log(budgetForm)
         updateBudget(budgetForm);
 
-        navigate("/user/" + id_user + "/budgets");
+        
     }
 
     useEffect( () => {

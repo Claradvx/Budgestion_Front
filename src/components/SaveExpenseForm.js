@@ -29,6 +29,7 @@ const SaveExpenseForm = () => {
     const getParticipants = async () => {
         const {data} = await axios.get("http://localhost:8090/budget/" + id_budget + "/participants");
         setParticipants(data);
+        getPayeur(data[0].id);
     };
 
     const getPayeur = async (id_payeur) => {
@@ -43,14 +44,14 @@ const SaveExpenseForm = () => {
 
     const saveExpense = async (expenseForm) => {
         const {data} = await axios.post("http://localhost:8090/saveexpense", expenseForm); 
+        navigate("/user/" + id_user + "/budget/" + id_budget + "/expenses");
     };
  
     const handleSubmit = (e) => {
         e.preventDefault();
-
         const beneficiaires = ([]);
-
         const form = e.target;
+
         const expenseForm = {};
        
         expenseForm["name"] = form[0].value;
@@ -68,10 +69,7 @@ const SaveExpenseForm = () => {
         })
    
         expenseForm["beneficiaires"] = beneficiaires;
-
-        saveExpense(expenseForm);
-
-        navigate("/user/" + id_user + "/budget/" + id_budget + "/expenses");
+        saveExpense(expenseForm);        
     }
 
     useEffect( () => {
