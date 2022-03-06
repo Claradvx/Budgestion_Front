@@ -25,7 +25,6 @@ export const SignInForm = () => {
         e.preventDefault();
         const form = e.target;
 
-        console.log(e)
         const userForm = {};
         userForm["username"] = form[0].value;
         userForm["password"] = form[1].value;
@@ -89,7 +88,6 @@ export const SignUpForm = () => {
         user["username"] = form[2].value;
         user["password"] = form[3].value;
 
-        console.log(user);
         createUser(user);
         navigate("/signin");
     };

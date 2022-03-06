@@ -1,15 +1,18 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { default as logo } from '../assets/images/Budgestion_logo_fondBleu.svg';
 import { default as backArrow } from '../assets/images/BackLeftArrow.svg';
+import { IsConnected } from '../store/isConnected';
 import '../styles/Header.css';
+
 
 const Header = () => {
 
-    let isConnected = false;
+    const isConnected = false;
     const navigate = useNavigate();
 
     const params = useParams();
     const id_user = params.id_user;
+
 
     return (
         <header>
