@@ -90,7 +90,7 @@ const SaveParticipantsForm = () => {
         updateBudget(budgetForm)
         .then(() => navigate("/user/" + id_user + "/budgets"));
     }
-
+ 
     return (
         <> 
             <div className='box'>
