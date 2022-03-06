@@ -38,6 +38,7 @@ const SaveParticipantsForm = () => {
 
     const updateBudget = async (budget) => {
         const {data} = await axios.put("http://localhost:8090/updatebudget", budget); 
+        getBudget(data);
     };
 
     const updateParticipant = async (participantForm) => {
@@ -86,14 +87,9 @@ const SaveParticipantsForm = () => {
         const budgetForm = {};
         budgetForm["id"] = id_budget;
         budgetForm["membersBudget"] = participants;
-        updateBudget(budgetForm);
-        console.log(participants);
-
-        navigate("/user/" + id_user + "/budgets");
+        updateBudget(budgetForm)
+        .then(() => navigate("/user/" + id_user + "/budgets"));
     }
-
-
-
 
     return (
         <> 

@@ -9,14 +9,12 @@ const Profile = () => {
     const id_user = params.id_user;
 
     return (
-        
         <>
             <h1>Mes données personnelles</h1>
 
             <ShowProfile />
 
             <UserFooter iduser={id_user} />
-    
         </>
     )
 }
