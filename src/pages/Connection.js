@@ -1,4 +1,5 @@
 import { SignInForm, SignUpForm } from "../components/ConnectionForm.js";
+import Header from "../components/Header.js";
 
 export const SignIn = () => {
 

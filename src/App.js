@@ -24,7 +24,6 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        
         <Header />
 
         <div className="main">
@@ -51,8 +50,6 @@ function App() {
         </div>
       </BrowserRouter>
 
-    {/* A VOIR : pdt le cours on a installé globalement json-server : npm i json-server
-    voir si necessaire de l'ajouter à notre projet (voir dépendances package.json)*/}
     </div>
   );
 }

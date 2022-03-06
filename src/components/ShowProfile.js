@@ -37,10 +37,6 @@ const ShowProfile = () => {
                         <p className='data'>{user.username}</p>
                     </div>
                     <div className = 'field'>
-                        <label htmlFor = 'pwd' >Password</label>
-                        <p className='data'>{user.password}</p>
-                    </div>
-                    <div className = 'field'>
                         <label htmlFor = 'age' >Âge</label>
                         <p className='data'>{user.age}</p>
                     </div>

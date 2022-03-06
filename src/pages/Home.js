@@ -12,7 +12,7 @@ const Home = () => {
                 alt = 'Budgestion' />
             
 
-            <p>Budgestion est l'application qu'il te faut que pour gérer les budgets entre amis en famille, pro ou encore perso.</p>
+            <p>Budgestion est l'application qu'il te faut pour gérer les budgets entre amis en famille, pro ou encore perso.</p>
 
             <h3>Fini les disputes entre amis</h3>
             <p>C'est la solution pour vous libérer des conflits d'argent entre amis pendant les vacances. 
