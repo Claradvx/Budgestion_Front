@@ -20,6 +20,11 @@ export const  BudgetFooter = ({idBudget, deleteAction}) => {
                         onClick={ () => navigate("/user/" + id_user + "/updatebudget/" + idBudget) }>
                     Modifier budget
                 </button>
+
+                <button className='retourbutton'
+                        onClick={ () => navigate("/user/" + id_user + "/budgets") }>
+                    Retour aux budgets
+                </button>
                 
                 <button className='deletebutton'
                         onClick={onDeleteClick}>
@@ -49,6 +54,11 @@ export const  ExpenseFooter = ({idBudget, idExpense, deleteAction}) => {
                 <button className='modifbutton'
                         onClick={ () => navigate("/user/" + id_user + "/budget/" + idBudget + "/updateexpense/" + idExpense) }>
                     Modifier dépense
+                </button>
+
+                <button className='retourbutton'
+                        onClick={ () => navigate("/user/" + id_user + "/budget/" + idBudget + "/expenses") }>
+                    Retour aux dépenses
                 </button>
                 
                 <button className='deletebutton'
