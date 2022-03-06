@@ -9,8 +9,7 @@ export const  BudgetFooter = ({idBudget, deleteAction}) => {
     const id_user = params.id_user;
 
     const onDeleteClick = () => {
-        deleteAction();
-        navigate("/user/" + id_user + "/budgets");
+        deleteAction().then(() => navigate("/user/" + id_user + "/budgets"));
     }
 
     return (
@@ -44,8 +43,7 @@ export const  ExpenseFooter = ({idBudget, idExpense, deleteAction}) => {
     const id_user = params.id_user;
 
     const onDeleteClick = () => {
-        deleteAction();
-        navigate("/user/" + id_user + "/budget/" + idBudget + "/expenses");
+        deleteAction().then(() => navigate("/user/" + id_user + "/budget/" + idBudget + "/expenses"));
     }
 
     return (

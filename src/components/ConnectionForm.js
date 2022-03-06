@@ -7,16 +7,19 @@ export const SignInForm = () => {
 
     const navigate = useNavigate();
 
+    const [error, setError] = useState("");
     const [user, setUser] = useState([]);
 
     let id_user;
     const validateUser = async (userLogin) => {
-        const {data} = await axios.post("http://localhost:8090/signin", userLogin);
-        id_user =  data.id;
-        console.log("après post : ", data);
-        setUser(data);
+        try {
+            const {data} = await axios.post("http://localhost:8090/signin", userLogin);
+            id_user =  data.id;
+            setUser(data);
+        } catch (error) {
+            setError("Votre nom d'utilisateur / mot de passe est incorrect");
+        }
     }
-
 
     const login = (e) => {
         e.preventDefault();
@@ -27,9 +30,15 @@ export const SignInForm = () => {
         userForm["username"] = form[0].value;
         userForm["password"] = form[1].value;
         
-        validateUser(userForm).then(() => navigate("/user/" + id_user + "/budgets"));
-        
-        // navigate("/user/" + user.id + "/budgets");
+        validateUser(userForm)
+        .then(() => {
+            console.log(user);
+        if (id_user){
+        navigate("/user/" + id_user + "/budgets")
+        } else {
+                setError("Votre nom d'utilisateur / mot de passe est incorrect");
+    
+        }});
     }
 
     useEffect( () => {
@@ -49,10 +58,12 @@ export const SignInForm = () => {
                         <input type='password' id='pwd-signin' />
                         <label htmlFor='pwd'>Password</label>
                     </div>
+                    { (error != "") ?
+                        (<p className ="error" >{error}</p>) : ""
+                    }
                     <p>
                     <button type='submit'>OK</button>
-                    {/* Si connexion est correct il faudra changer la variable isConnected en true !
-                    Ce qui changera dans header vers le bouton Profile !*/}
+
                     </p>
                 </form>
             </div>

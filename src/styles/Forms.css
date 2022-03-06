@@ -220,3 +220,7 @@ li#participants #text{
 .box button.addbutton {
   background: var(--gold);  
 }
+
+p.error {
+  color: var(--gold);
+}
