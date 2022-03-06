@@ -13,6 +13,7 @@ const UpdateExpenseForm = () => {
     const [inputMontant, setInputMontant] = useState(0);
     const [payeur, setPayeur] =  useState([]);
     const [participants, setParticipants] =  useState([]);
+    const [beneficiaires, setBeneficiaires] =  useState([]);
     const [id_payeur, setIdPayeur] =  useState(0);
     const [state, setState] = useState({value: ""});
     
@@ -38,6 +39,7 @@ const UpdateExpenseForm = () => {
         setInputName(document.getElementById('name').value=data.name);
         setInputDescription(document.getElementById('description').value=data.description);
         setInputMontant(document.getElementById('montant').value=data.montant);
+        setBeneficiaires(data.beneficiaires);
         setState({value: data.payeur.id});     
     };
 
@@ -53,7 +55,7 @@ const UpdateExpenseForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const beneficiaires = ([]);
+        const beneficiaires_selected = ([]);
 
         const form = e.target;
         const expenseForm = {};
@@ -70,12 +72,11 @@ const UpdateExpenseForm = () => {
         participants.map( p => {
             for(let i = 4; i < form.length-1 ; i++) {
                 if (p.username === form[i].id && form[i].checked) {
-                    beneficiaires.push(p);
+                    beneficiaires_selected.push(p);
                 }
             }
         })
-   
-        expenseForm["beneficiaires"] = beneficiaires;
+        expenseForm["beneficiaires"] = beneficiaires_selected;
 
         updateExpense(expenseForm);
 
@@ -118,11 +119,14 @@ const UpdateExpenseForm = () => {
                     <ul>
                         <FormGroup>
                             {participants.map( p => (
-                                                     <li id='participants' key={p.id}>
-                                                    <FormControlLabel key={p.id} control={<Checkbox  id={p.username}
-                                                    defaultChecked/>} label={p.username} />
-                                                     </li> 
-                                                     ))}
+                                <li id='participants' key={p.id}>
+                                    <FormControlLabel key={p.id} control={
+                                        <Checkbox  id={p.username}
+                                                defaultChecked />
+                                        } 
+                                        label={p.username} />
+                                </li> 
+                            ))}
                         </FormGroup>
                         </ul>   
 

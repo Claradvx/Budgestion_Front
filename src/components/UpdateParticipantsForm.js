@@ -28,9 +28,15 @@ const UpdateParticipantsForm = () => {
         setBudget(data);
     };
 
+<<<<<<< HEAD
     const updateBudget = async (budgetForm) => {
         const {data} = await axios.put("http://localhost:8090/updatebudget", budgetForm); 
         navigate("/user/" + id_user + "/budgets");
+=======
+    const updateBudget = async (budget) => {
+        const {data} = await axios.put("http://localhost:8090/updatebudget", budget); 
+        getBudget(data);
+>>>>>>> acb4a7069c73fbd3efd5d5862585b33e68d16d60
     };
 
     const updateParticipant = async (participantForm) => {
