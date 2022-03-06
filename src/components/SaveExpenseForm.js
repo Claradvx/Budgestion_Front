@@ -9,89 +9,96 @@ import { Checkbox, FormGroup, FormControlLabel } from '@material-ui/core';
 const SaveExpenseForm = () => {
 
     const navigate = useNavigate();
-    
+
+    const [participants, setParticipants] =  useState([]);
     const [payeur, setPayeur] =  useState([]);
-    const [participants, setParticipants] =  useState([[]]);
-  //  const [expense, setExpense] =  useState([[]]);
     const [budget, setBudget] =  useState([]);
-    const [checkedOne, setCheckedOne] = useState(false);
+    const [id_payeur, setIdPayeur] =  useState(0);
     const [state, setState] = useState({value: ""});
     
     const params = useParams(); 
     const id_budget = params.id_budget;
-    const id_user = params.id_user;
-  
-    const handleChangeBeneficiaires = (e) => {
-        setCheckedOne(!checkedOne);
-    };;
 
     const handleChangePayeur = (e) => {
-      setState({value: e.target.value});
+        setState({value: e.target.value});
+        setIdPayeur(e.target.value);
+        getPayeur((e.target.value));
     };
-
+  
     const getParticipants = async () => {
-        const {data} = await axios.get("http://localhost:8090/budget" + id_budget + "/participants");
+        const {data} = await axios.get("http://localhost:8090/budget/" + id_budget + "/participants");
         setParticipants(data);
     };
 
     const getPayeur = async (id_payeur) => {
-        const {data} = await axios.get("http://localhost:8090/participant" + id_payeur);
+        const {data} = await axios.get("http://localhost:8090/participant/" + id_payeur);
         setPayeur(data);
     };
 
     const getBudget = async () => {
-        const {data} = await axios.get("http://localhost:8090/budget" + id_budget);
+        const {data} = await axios.get("http://localhost:8090/budget/" + id_budget);
         setBudget(data);
     };
 
-    const createExpense = async (budget) => {
-        const {data} = await axios.post("http://localhost:8090/saveexpense", budget); 
-        console.log("data" + data);
+    const saveExpense = async (expenseForm) => {
+        const {data} = await axios.post("http://localhost:8090/saveexpense", expenseForm); 
     };
-
+ 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        const beneficiaires = ([]);
+
         const form = e.target;
         const expenseForm = {};
-        
-        for(let i = 0; i < 3 ; i++) {
-            const input = form[i];
-            expenseForm[input.id] = input.value;
-        }
-        
-        expenseForm["budget"] = budget;
+       
+        expenseForm["name"] = form[0].value;
+        expenseForm["description"] = form[1].value;
+        expenseForm["montant"] = form[2].value;
         expenseForm["payeur"] = payeur;
+        expenseForm["budget"] = budget;
+        console.log(expenseForm);
+        participants.map( p => {
+            for(let i = 4; i < form.length-1 ; i++) {
+                if (p.username === form[i].id && form[i].checked) {
+                    beneficiaires.push(p);
+                }
+            }
+        })
+   
+        expenseForm["beneficiaires"] = beneficiaires;
 
-        createExpense(expenseForm)
-            .then(navigate("/user/" + id_user + "/budget" + id_budget + "/expenses"));
+        saveExpense(expenseForm);
+
+      //  navigate("/user/" + id_user + "/budget/" + id_budget + "/expenses");
     }
 
     useEffect( () => {
-        getPayeur(state.value);
-        getParticipants();
         getBudget();
-    }, [state.value]);
+        getParticipants();
+    }, []); 
+
 
     return (
         <> 
             <div className='box'>
                 <form onSubmit={handleSubmit}>
-
+                
                     <div className='field'>
                         <input type='text' id='name' />
-                        <label htmlFor='name'>Nom de la dépense</label>
+                        <label htmlFor="name">Nom de la dépense</label>
                     </div>
 
                     <div className='field'>
-                        <input type='text' id='description' />
+                        <input type='text' id='description'/>
                         <label htmlFor="description">Description</label>
                     </div>
 
                     <div className='field'>
-                        <input type='text' id='montant' />
-                        <label htmlFor='montant'>Montant</label>
+                        <input type='text' id='montant'/>
+                        <label htmlFor='username'>Montant de la dépense</label>
                     </div>
-                    
+
                     <label className='listeDeroulante' htmlFor='payeur'>Participant ayant payé la dépense</label>
                     <select value={state.value} onChange={handleChangePayeur}>
                          {participants.map( p => (
@@ -99,25 +106,20 @@ const SaveExpenseForm = () => {
                                                  ))}
                     </select>
                     
-                    <label className='participants' htmlFor='payeur'>Participants ayant bénéficié de la dépense</label>
-                        <ul>
+                    <ul>
                         <FormGroup>
                             {participants.map( p => (
-                                                     <li id='participants'>
-                                                        <FormControlLabel key={p.id} 
-                                                                        control={<Checkbox  value={checkedOne} 
-                                                                                            id={p.username} 
-                                                                                            onChange={handleChangeBeneficiaires} />} 
-                                                                        label={p.username} />
+                                                     <li id='participants' key={p.id}>
+                                                    <FormControlLabel key={p.id} control={<Checkbox  id={p.username}
+                                                    defaultChecked/>} label={p.username} />
                                                      </li> 
                                                      ))}
                         </FormGroup>
-                        </ul>                       
+                        </ul>   
 
                     <p>
-                    <button type='submit'>OK</button>
+                    <button type='submit'>Valider les modifications</button>
                     </p>
-
                 </form>
             </div>
         </>

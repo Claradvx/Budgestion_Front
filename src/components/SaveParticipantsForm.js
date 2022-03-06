@@ -1,68 +1,138 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import '../styles/Forms.css';
 
 const SaveParticipantsForm = () => {
     
-    const [participants, setParticipants] = useState([]);
-    
-    // const getparticipants = () => {
-    //     setParticipants(participants);
-    // }
+    const navigate = useNavigate();
 
-    const addParticipants = (e) => {
+    const [inputUsername, setInputUsername] =  useState("");
+    const [participants, setParticipants] =  useState([]);
+    const [budget, setBudget] =  useState([]);
+    
+    const params = useParams(); 
+    const id_budget = params.id_budget;
+    const id_user = params.id_user;
+
+    useEffect( () => {
+        getParticipants();
+        getBudget();
+    }, []); 
+
+    useEffect( () => {
+        getParticipants();
+    }, [participants.lenght]); 
+
+    const getParticipants = async () => {
+        const {data} = await axios.get("http://localhost:8090/budget/" + id_budget + "/participants");
+        setParticipants(data);
+        participants.map(p => {
+            setInputUsername(document.getElementById(p.id).value=p.username)});
+    };
+
+    const getBudget = async () => {
+        const {data} = await axios.get("http://localhost:8090/budget/" + id_budget);
+        setBudget(data);
+    };
+
+    const updateBudget = async (budget) => {
+        const {data} = await axios.put("http://localhost:8090/updatebudget", budget); 
+    };
+
+    const updateParticipant = async (participantForm) => {
+        const {data} = await axios.put("http://localhost:8090/updateparticipant", participantForm);
+    };
+
+    const createParticipant = async (participant) => {
+        const {data} = await axios.post("http://localhost:8090/saveparticipant/", participant);
+    };
+
+
+
+    const SaveParticipant = (e) => {
         e.preventDefault();
         const form = e.target.form;
+        const newparticipant = {};
+
+        newparticipant["username"] = form[0].value;
+        newparticipant["budget"] = budget;
+        participants.push(newparticipant);
+        createParticipant(newparticipant);
+        getParticipants();
         
-
-        participants.push(form[0].value);
-        console.log(participants);
-        
-        // getparticipants();
+        form[0].value = '';
     }
-
-    const handleChange = (e) => {
-        setParticipants(e.target.value);
-    }
-
-    const validateParticipants = (e) => {
-        // Fonction récupérant la liste des participant entrée
-        // Créant chacun des participants (ou dans une autre fonction)
-        // Assignant l'id de l'user au participant qu'il a choisi  
+ 
+    const handleSubmit = (e) => {
         e.preventDefault();
+        const form = e.target;
+        const participantForm =         {
+            "id": null,
+            "username": null,
+            "budget": {}
+        };
 
-        console.log("boutton submit");
+        for(let i = 0; i < form.length-1 ; i++) {
+            participantForm["id"] = form[i].id;
+            participantForm["username"] = form[i].value;
+            participantForm["budget"] = budget;
+            console.log(form[i].id + form[i].value);
+            console.log(participantForm);
+            updateParticipant(participantForm);
+        }
 
+        const budgetForm = {};
+        budgetForm["id"] = id_budget;
+        budgetForm["membersBudget"] = participants;
+        updateBudget(budgetForm);
+        console.log(participants);
+
+        navigate("/user/" + id_user + "/budgets");
     }
 
-    useEffect(() => {
-        // getparticipants();
-    }, [] );
+
+
 
     return (
+        <> 
             <div className='box'>
-                <form onSubmit={validateParticipants}>
+                <form onSubmit={handleSubmit}>
                     
                     <ul>
-                        {(participants.length !== 0) &&
-                            (
-                                <>
-                                    {participants.map( p => <input value={p} onChange={handleChange} /> )
-                                    // participants.map( p => <li key={p}>{p}</li> )
-                                    }
-                                </>
-                            )}
-                    </ul>
-                    
-                    
-                    <div>
-                        <input id='username' name='username'/>
-                        <button onClick={addParticipants}>+</button>
-                    </div>
-                    
+                            {participants.map( p => (
+                                                     <li className='participants' key={p.id}>
+                                                         <input type='text' id={p.id}/>
+                                                     </li>
+                                                     ))}
+                        </ul>                      
+
+                    <p>
                     <button type='submit'>OK</button>
+                    </p>
+
                 </form>
-            </div>  
+            </div>
+
+
+            <div className='box'>
+                <form onSubmit={handleSubmit}>
+                    
+                    <div className='field'>
+                    <ul>         
+                            <li id='participants'>
+                            <div className='addparticipant'>
+                                    <input type='text' />
+                                    <button onClick={SaveParticipant}>Ajouter un participant</button>
+                            </div>
+                            </li>
+                        </ul>
+                        
+                    </div>                        
+
+                </form>
+            </div>
+        </>
     )
 
 }
