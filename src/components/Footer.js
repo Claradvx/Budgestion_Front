@@ -90,6 +90,11 @@ export const  UserFooter = ({iduser}) => {
                         onClick={ () => navigate("/user/" + iduser + "/updateprofile") }>
                     Modifier mon profil
                 </button>
+
+                <button className='retourbutton'
+                        onClick={ () => navigate("/user/" + id_user + "/budgets") }>
+                    Retour aux budgets
+                </button>
                 
                 <button className='logout'
                         onClick={logout} >
