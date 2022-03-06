@@ -7,7 +7,6 @@ const UpdateParticipantsForm = () => {
 
     const navigate = useNavigate();
 
-  //  const [inputUsername, setInputUsername] =  useState([]);
     const [participants, setParticipants] =  useState([]);
     const [budget, setBudget] =  useState([]);
     
@@ -18,9 +17,6 @@ const UpdateParticipantsForm = () => {
     const getParticipants = async () => {
         const {data} = await axios.get("http://localhost:8090/budget/" + id_budget + "/participants");
         setParticipants(data);
-   //     participants.map(p => {
-   //         console.log(p.username, " id : ", p.id)
-  //          setInputUsername(document.getElementById(p.id).value=p.username)});
     };
 
     const getBudget = async () => {
@@ -28,15 +24,9 @@ const UpdateParticipantsForm = () => {
         setBudget(data);
     };
 
-<<<<<<< HEAD
     const updateBudget = async (budgetForm) => {
         const {data} = await axios.put("http://localhost:8090/updatebudget", budgetForm); 
         navigate("/user/" + id_user + "/budgets");
-=======
-    const updateBudget = async (budget) => {
-        const {data} = await axios.put("http://localhost:8090/updatebudget", budget); 
-        getBudget(data);
->>>>>>> acb4a7069c73fbd3efd5d5862585b33e68d16d60
     };
 
     const updateParticipant = async (participantForm) => {
@@ -47,9 +37,6 @@ const UpdateParticipantsForm = () => {
         const {data} = await axios.post("http://localhost:8090/saveparticipant/", newparticipant);
         setParticipants(participants);
     };
-
-
-
 
     const SaveParticipant = (e) => {
         e.preventDefault();
@@ -88,9 +75,7 @@ const UpdateParticipantsForm = () => {
         budgetForm["description"] = budget.description;
         budgetForm["membersBudget"] = participants;
         console.log(budgetForm)
-        updateBudget(budgetForm);
-
-        
+        updateBudget(budgetForm);  
     }
 
     useEffect( () => {
